@@ -52,6 +52,7 @@ void DungeonEngine::getInput()
         std::getline(std::cin, line);
         inputBuffer = line;
 
+
         if (inputBuffer == "q")
         {
             quit = true;
@@ -167,6 +168,13 @@ void DungeonEngine::render()
     //
 
     std::cout << "test msg: [m] | quit: [q] " << std::endl;
+
+    //
+    // Render Combat Screen
+    //
+    CombatManager combatManager;
+    combatManager.itemMenuActive = true;
+    combatManager.display(33, 1);
 }
 
 void DungeonEngine::loop()
