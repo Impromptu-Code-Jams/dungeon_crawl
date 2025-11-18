@@ -33,20 +33,23 @@ void Player::addXp(int xpAdd)
 
 }
 
-void Player::addItem(Item item)
+void Player::addItem(Item& item)
 {
 	switch (item.type)
 	{
 	case (CONSUMABLE): {
-		inventory.consumables.emplace_back(item);
+		Consumable& consumable = dynamic_cast<Consumable&>(item);
+		inventory.consumables.emplace_back(consumable);
 		break;
 	}
 	case (WEAPON): {
-		inventory.weapons.emplace_back(item);
+		Weapon& weapon = dynamic_cast<Weapon&>(item);
+		inventory.weapons.emplace_back(weapon);
 		break;
 	}
 	case (SPELL): {
-		inventory.spells.emplace_back(item);
+		Spell& spell = dynamic_cast<Spell&>(item);
+		inventory.spells.emplace_back(spell);
 		break;
 	}
 	}
