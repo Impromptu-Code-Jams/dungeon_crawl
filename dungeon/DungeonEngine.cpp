@@ -110,19 +110,10 @@ void DungeonEngine::render()
 	auto tileMap = rooms[currentRoomIndex]->getTileMap();
 	auto enemyList = roomApi.getEnemyList();
 
-	for (int y = 0; y < tileMap.size(); y++)
-	{
-		for (int x = 0; x < tileMap[y].size(); x++)
-		{
-			for (auto enemy : enemyList)
-			{
-				if (enemy.x == x && enemy.y == y)
-				{
-					tileMap[y][x] = enemy.glyph;
-				}
-			}
-		}
-	}
+    for (auto enemy : enemyList)
+    {
+        tileMap[enemy.y][enemy.x] = enemy.glyph;
+    }
 
 	//
 	// Render the current room.
@@ -205,7 +196,8 @@ void DungeonEngine::loop()
 
 		last = now;
 
-		handleInput();
+        handleInput();
+        roomApi.updateEnemies(6, 3); //TODO feed player position
 
 		if (quit)
 		{

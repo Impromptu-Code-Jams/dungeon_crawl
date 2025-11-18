@@ -39,3 +39,10 @@ std::vector<Enemy> RoomApi::getEnemyList()
 {
     return enemyList;
 }
+
+void RoomApi::updateEnemies(int playerX, int playerY)
+{
+    for (auto& enemy : enemyList) {
+        enemy.updatePosition(playerX, playerY);
+    }
+}
