@@ -8,15 +8,24 @@
 #include "GetCh.h"
 
 DungeonEngine::DungeonEngine() :
+<<<<<<< HEAD
+    running(false),
+    quit(false),
+    currentRoomIndex(0),
+    hasInput(false),
+    inputBuffer()
+{}
+=======
 	running(false),
 	quit(false),
-	inCombat(true),
+	inCombat(false),
 	currentRoomIndex(0),
 	hasInput(false),
-	inputBuffer()
+	inputBuffer("")
 {
 	combatManager = std::make_unique<CombatManager>();
 }
+>>>>>>> f5c048b (added combat input and combat manager stuff)
 
 void DungeonEngine::addRoom(std::unique_ptr<IRoom> room)
 {
@@ -50,11 +59,28 @@ void DungeonEngine::enterRoom(int roomIndex)
 
 void DungeonEngine::getInput()
 {
+<<<<<<< HEAD
     while (!quit)
     {
         inputBuffer = getSingleChar();
 
-		if (inputBuffer == 'q')
+        if (inputBuffer == 'q')
+        {
+            quit = true;
+        }
+        else
+        {
+            hasInput = true;
+        }
+    }
+=======
+	while (!quit)
+	{
+		std::string line;
+		std::getline(std::cin, line);
+		inputBuffer = line;
+
+		if (inputBuffer == "q")
 		{
 			quit = true;
 		}
@@ -63,28 +89,45 @@ void DungeonEngine::getInput()
 			hasInput = true;
 		}
 	}
+>>>>>>> f5c048b (added combat input and combat manager stuff)
 }
 
 void DungeonEngine::handleInput()
 {
+<<<<<<< HEAD
+    if(hasInput)
+    {
+        if(inputBuffer == 'm')
+        {
+            static int x = 1;
+            roomApi.showMessage("Hello There! " + std::to_string(x));
+            x++;
+        }
+
+        inputBuffer = 0;
+        hasInput = false;
+    }
+=======
 	if (hasInput)
 	{
 		if (inCombat)
 		{
-			if (!combatManager->handleInput(inputBuffer, roomApi))
+			if (!combatManager->handleInput(inputBuffer))
 			{
 				inCombat = false;
 			}
 		}
-		else if (inputBuffer == 'm')
+		else if (inputBuffer == "m")
 		{
 			static int x = 1;
 			roomApi.showMessage("Hello There! " + std::to_string(x));
 			x++;
 		}
-		inputBuffer = 0;
+
+		inputBuffer = "";
 		hasInput = false;
 	}
+>>>>>>> f5c048b (added combat input and combat manager stuff)
 }
 
 void DungeonEngine::render()

@@ -2,36 +2,37 @@
 
 #include <memory>
 #include <vector>
+#include <string>
 
 enum EnemyType
 {
-    Goblin
+	Goblin
 };
 
 struct Enemy
 {
-    EnemyType type;
-    int x;
-    int y;
-    int hp;
-    int atk;
-    int def;
-    char glyph;
+	EnemyType type;
+	int x;
+	int y;
+	int hp;
+	int atk;
+	int def;
+	char glyph;
 };
 
 class RoomApi
 {
-    public:
-        RoomApi();
-        
-        void showMessage(std::string const & message);
-        std::vector<std::string> getMessages();
+public:
+	RoomApi();
 
-        void spawnEnemy(int x, int y, EnemyType enemyType);
-        std::vector<Enemy> getEnemyList();
+	void showMessage(std::string const& message);
+	std::vector<std::string> getMessages();
 
-    private:
-        std::vector<std::string> messages;
-        std::vector<Enemy> enemyList;
+	void spawnEnemy(int x, int y, EnemyType enemyType);
+	std::vector<Enemy> getEnemyList();
+
+private:
+	std::vector<std::string> messages;
+	std::vector<Enemy> enemyList;
 };
 

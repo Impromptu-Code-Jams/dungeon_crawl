@@ -1,1 +1,56 @@
-// Do stuff here!
+#include "CombatManager.h"
+
+bool CombatManager::handleInput(char input, RoomApi& api)
+{
+	bool inCombat = true;
+
+	switch (std::toupper(input)) {
+	case 'A':
+		api.showMessage("You attacked!");
+		break;
+	case 'D':
+		api.showMessage("You defended!");
+		break;
+	case 'M':
+		magicMenuActive = true;
+		itemMenuActive = false;
+		break;
+	case 'I':
+		itemMenuActive = true;
+		magicMenuActive = false;
+		// setting this to false for now, need to make it false when defeat or victory conditions happen
+		inCombat = false;
+		break;
+	default:
+		api.showMessage("Please enter a valid action!");
+		break;
+	}
+
+	if (magicMenuActive && isdigit(input))
+	{
+		//int damage = player->castSpell(static_cast<int>(input));
+		//if (damage > -1)
+		//{
+		//	enemy->applyDamage(damage);
+		//	if (enemy->health <= 0)
+		//	{
+		//		api.showMessage("Enemy defeated!");
+		//		inCombat = false;
+		//	}
+		//	api.showMessage("You cast a spell!");
+		//	magicMenuActive = false;
+		//}
+	}
+	else if (itemMenuActive && isdigit(input))
+	{
+		//int item = player->getItem(static_cast<int>(input));
+		//if (item > -1)
+		//{
+		//	player->useItem(item);
+		//	itemMenuActive = false;
+		//	api.showMessage("You used an item!");
+		//}
+	}
+
+		return inCombat;
+}

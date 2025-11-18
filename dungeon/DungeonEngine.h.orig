@@ -27,12 +27,17 @@ private:
 	bool quit{};
 	bool inCombat{};
 
+<<<<<<< HEAD
+        bool hasInput;
+        char inputBuffer;
+=======
 	int currentRoomIndex{};
 	std::vector<std::unique_ptr<IRoom>> rooms{};
 	RoomApi roomApi{};
 	std::unique_ptr<CombatManager> combatManager{};
 
 	bool hasInput{};
-	char inputBuffer{};
+	std::string inputBuffer{};
+>>>>>>> f5c048b (added combat input and combat manager stuff)
 };
 
