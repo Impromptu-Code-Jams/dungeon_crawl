@@ -50,11 +50,21 @@ void DungeonEngine::enterRoom(int roomIndex)
 
 void DungeonEngine::getInput()
 {
+<<<<<<< HEAD
     while (!quit)
     {
         inputBuffer = getSingleChar();
 
 		if (inputBuffer == 'q')
+=======
+	while (!quit)
+	{
+		std::string line;
+		std::getline(std::cin, line);
+		inputBuffer = line;
+
+		if (inputBuffer == "q")
+>>>>>>> f5c048b (added combat input and combat manager stuff)
 		{
 			quit = true;
 		}
@@ -71,19 +81,31 @@ void DungeonEngine::handleInput()
 	{
 		if (inCombat)
 		{
+<<<<<<< HEAD
 			if (!combatManager->handleInput(inputBuffer, roomApi))
+=======
+			if (!combatManager->handleInput(inputBuffer))
+>>>>>>> f5c048b (added combat input and combat manager stuff)
 			{
 				inCombat = false;
 			}
 		}
+<<<<<<< HEAD
 		else if (inputBuffer == 'm')
+=======
+		else if (inputBuffer == "m")
+>>>>>>> f5c048b (added combat input and combat manager stuff)
 		{
 			static int x = 1;
 			roomApi.showMessage("Hello There! " + std::to_string(x));
 			x++;
 		}
 
+<<<<<<< HEAD
 		inputBuffer = 0;
+=======
+		inputBuffer = "";
+>>>>>>> f5c048b (added combat input and combat manager stuff)
 		hasInput = false;
 	}
 }
