@@ -25,6 +25,8 @@ target_include_directories(
 project(Dungeon)
 
 set(FILES
+    "${PROJECT_SOURCE_DIR}/CombatManager.h"
+    "${PROJECT_SOURCE_DIR}/CombatManager.cpp"
     "${PROJECT_SOURCE_DIR}/DungeonEngine.h"
     "${PROJECT_SOURCE_DIR}/DungeonEngine.cpp"
 )
