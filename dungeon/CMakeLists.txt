@@ -15,11 +15,13 @@ add_library(Dungeon)
 
 target_sources(Dungeon
     PRIVATE
+      CombatManager.cpp
       DungeonEngine.cpp
       GetCh.h
     PUBLIC FILE_SET HEADERS
     BASE_DIRS .
     FILES 
+        CombatManager.h
         DungeonEngine.h
 )
 
