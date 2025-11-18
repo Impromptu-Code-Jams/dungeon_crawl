@@ -13,14 +13,24 @@ target_sources(RoomApi
 
 add_library(Dungeon)
 
-target_sources(Dungeon
-    PRIVATE
-      DungeonEngine.cpp
-      GetCh.h
-    PUBLIC FILE_SET HEADERS
-    BASE_DIRS .
-    FILES 
-        DungeonEngine.h
+set(FILES
+    "${PROJECT_SOURCE_DIR}/CombatManager.h"
+    "${PROJECT_SOURCE_DIR}/CombatManager.cpp"
+    "${PROJECT_SOURCE_DIR}/DungeonEngine.h"
+    "${PROJECT_SOURCE_DIR}/DungeonEngine.cpp"
+)
+
+add_library(
+    ${PROJECT_NAME}
+        STATIC
+        ${FILES}
+        
+)
+
+target_include_directories(
+    ${PROJECT_NAME}
+        PUBLIC
+            ${PROJECT_SOURCE_DIR}
 )
 
 target_link_libraries(
