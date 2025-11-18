@@ -9,17 +9,13 @@ add_subdirectory(dungeon)
 
 ################################################################
 
-set(SOURCE_FILES
-    "${PROJECT_SOURCE_DIR}/main.cpp"
-)
-
 add_executable(
-    ${PROJECT_NAME}
-        ${SOURCE_FILES}
+    DungeonCrawl
+        main.cpp
 )
 
 target_link_libraries(
-    ${PROJECT_NAME}
+    DungeonCrawl
         PRIVATE
             Dungeon
             IRoom
@@ -28,7 +24,5 @@ target_link_libraries(
 
 install(
     TARGETS
-        ${PROJECT_NAME}
-    DESTINATION
-        bin
+        DungeonCrawl
 )
