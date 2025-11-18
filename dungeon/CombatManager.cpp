@@ -3,8 +3,6 @@
 bool CombatManager::handleInput(char input, RoomApi& api)
 {
 	bool inCombat = true;
-	bool inputIsNumber = true;
-	int numInput = -1;
 
 	switch (std::toupper(input)) {
 	case 'A':
@@ -16,52 +14,43 @@ bool CombatManager::handleInput(char input, RoomApi& api)
 	case 'M':
 		magicMenuActive = true;
 		itemMenuActive = false;
-		api.showMessage("You cast a spell!");
 		break;
 	case 'I':
 		itemMenuActive = true;
 		magicMenuActive = false;
-		api.showMessage("You used an item!");
 		// setting this to false for now, need to make it false when defeat or victory conditions happen
 		inCombat = false;
 		break;
 	default:
 		api.showMessage("Please enter a valid action!");
 		break;
-
-	// try to convert the input to an integer
-	try {
-		numInput = std::stoi(input);
-	}
-	catch (const std::invalid_argument& e) {
-		inputIsNumber = false;
-	}
-	catch (const std::out_of_range& e) {
-		inputIsNumber = false;
 	}
 
-	if (magicMenuActive && inputIsNumber)
+	if (magicMenuActive && isdigit(input))
 	{
-		int damage = player->castSpell(numInput);
-		if (damage > -1)
-		{
-			enemy->applyDamage(damage);
-			if (enemy->health <= 0)
-			{
-				inCombat = false;
-			}
-			magicMenuActive = false;
-		}
+		//int damage = player->castSpell(static_cast<int>(input));
+		//if (damage > -1)
+		//{
+		//	enemy->applyDamage(damage);
+		//	if (enemy->health <= 0)
+		//	{
+		//		api.showMessage("Enemy defeated!");
+		//		inCombat = false;
+		//	}
+		//	api.showMessage("You cast a spell!");
+		//	magicMenuActive = false;
+		//}
 	}
-	else if (itemMenuActive && inputIsNumber)
+	else if (itemMenuActive && isdigit(input))
 	{
-		int item = player->getItem(numInput);
-		if (item > -1)
-		{
-			player->useItem(item);
-			itemMenuActive = false;
-		}
+		//int item = player->getItem(static_cast<int>(input));
+		//if (item > -1)
+		//{
+		//	player->useItem(item);
+		//	itemMenuActive = false;
+		//	api.showMessage("You used an item!");
+		//}
 	}
 
-	return inCombat;
+		return inCombat;
 }
