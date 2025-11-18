@@ -47,7 +47,7 @@ gdb -tui _install/bin/DungeonCrawl
 
 **MVP Goals**
 
-- [-] A playable dungeon by the end of the day.
+- [-] A playable dungeon by the end of the day
 
     - [-] Dungeon engine
 
@@ -59,10 +59,13 @@ gdb -tui _install/bin/DungeonCrawl
 
     - [-] Rooms
 
+        - [ ] Room API
+
         - [+] Room interface
 
         - [ ] Dynamic loading at runtime (.dll or .so)
 
+- [ ] Experiment with C++ concepts discussed
 
 **Stretch Goals**
 
