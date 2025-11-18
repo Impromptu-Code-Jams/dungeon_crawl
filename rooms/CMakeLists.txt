@@ -1,58 +1,36 @@
-project(IRoom)
+cmake_minimum_required(VERSION 3.28)
 
-set(FILES
-    "${PROJECT_SOURCE_DIR}/IRoom.h"
-)
+add_library(IRoom INTERFACE)
 
-add_library(
-    ${PROJECT_NAME}
-        INTERFACE
-            ${FILES}
-)
-
-target_include_directories(
-    ${PROJECT_NAME}
-        INTERFACE
-            $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>
-            $<INSTALL_INTERFACE:include>
+target_sources(IRoom
+    PUBLIC FILE_SET HEADERS BASE_DIRS . FILES
+        IRoom.h
 )
 
 target_link_libraries(
-    ${PROJECT_NAME}
+    IRoom
         INTERFACE
             RoomApi
 )
 
 #################################################################
 
-project(SpikeTrapRoom)
+add_library(SpikeTrapRoom)
 
-set(FILES
-    "${PROJECT_SOURCE_DIR}/SpikeTrapRoom.h"
-    "${PROJECT_SOURCE_DIR}/SpikeTrapRoom.cpp"
-)
-
-add_library(
-    ${PROJECT_NAME}
-        ${FILES}
-)
-
-target_include_directories(
-    ${PROJECT_NAME}
-        PUBLIC
-            $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>
-            $<INSTALL_INTERFACE:include>
+target_sources(SpikeTrapRoom
+    PRIVATE SpikeTrapRoom.cpp
+    PUBLIC FILE_SET HEADERS
+    BASE_DIRS .
+    FILES SpikeTrapRoom.h
 )
 
 target_link_libraries(
-    ${PROJECT_NAME}
+    SpikeTrapRoom
         PRIVATE
             IRoom
 )
 
 install(
     TARGETS
-        ${PROJECT_NAME}
-    DESTINATION
-        lib
+        SpikeTrapRoom
 )
