@@ -4,6 +4,7 @@
 #include <vector>
 #include "IRoom.h"
 #include "RoomApi.h"
+#include "CombatManager.h"
 
 class DungeonEngine
 {
