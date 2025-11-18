@@ -2,7 +2,7 @@
 
 #include <memory>
 #include <vector>
-#include "IRoom.h"
+#include "Room.h"
 #include "RoomApi.h"
 
 class DungeonEngine
@@ -10,7 +10,7 @@ class DungeonEngine
     public:
         DungeonEngine();
         
-        void addRoom(std::unique_ptr<IRoom> room);
+        void addRoom(std::unique_ptr<Room> room);
         void start();
 
     private:
@@ -26,7 +26,7 @@ class DungeonEngine
         bool quit;
 
         int currentRoomIndex;
-        std::vector<std::unique_ptr<IRoom>> rooms;
+        std::vector<std::unique_ptr<Room>> rooms;
         RoomApi roomApi;
 
         bool hasInput;

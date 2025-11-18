@@ -4,7 +4,7 @@
 #include <thread>
 
 #include "DungeonEngine.h"
-#include "IRoom.h"
+#include "Room.h"
 
 DungeonEngine::DungeonEngine() :
     running(false),
@@ -14,7 +14,7 @@ DungeonEngine::DungeonEngine() :
     inputBuffer("")
 {}
 
-void DungeonEngine::addRoom(std::unique_ptr<IRoom> room)
+void DungeonEngine::addRoom(std::unique_ptr<Room> room)
 {
     rooms.push_back(std::move(room));
 }
@@ -41,7 +41,6 @@ void DungeonEngine::start()
 void DungeonEngine::enterRoom(int roomIndex)
 {
     currentRoomIndex = roomIndex;
-    rooms[currentRoomIndex]->onEnter(roomApi);
 }
 
 void DungeonEngine::getInput()
@@ -97,22 +96,7 @@ void DungeonEngine::render()
     // Merge the tile maps.
     //
 
-    auto tileMap = rooms[currentRoomIndex]->getTileMap();
-    auto enemyList = roomApi.getEnemyList();
-
-    for (int y = 0; y < tileMap.size(); y++)
-    {
-        for (int x = 0; x < tileMap[y].size(); x++)
-        {
-            for (auto enemy : enemyList)
-            {
-                if (enemy.x == x && enemy.y == y)
-                {
-                    tileMap[y][x] = enemy.glyph;
-                }
-            }
-        }
-    }
+    auto tileMap = rooms[currentRoomIndex]->render();
 
     //
     // Render the current room.
