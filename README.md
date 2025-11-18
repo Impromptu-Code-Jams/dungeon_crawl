@@ -4,7 +4,7 @@ Let's try to make an ASCII rendered dungeon crawler game!
 
 Here is a preview of what the starter code gets you.
 
-![Dungeon Crawl v1](docs/gifs/DungeonCrawl_v1.gif)
+![Dungeon Crawl v2](docs/gifs/DungeonCrawl_v2.gif)
 
 ## Initial Setup
 
