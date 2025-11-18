@@ -23,6 +23,6 @@ std::vector<std::string> SpikeTrapRoom::getTileMap() const
 
 void SpikeTrapRoom::onEnter(RoomApi& api)
 {
-    api.showMessage("A goblin appears!");
+    //api.showMessage("A goblin appears!");
     api.spawnEnemy(2, 2, EnemyType::Goblin);
 }

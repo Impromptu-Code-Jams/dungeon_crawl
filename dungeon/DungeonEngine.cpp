@@ -47,6 +47,7 @@ void DungeonEngine::enterRoom(int roomIndex)
 {
     currentRoomIndex = roomIndex;
     rooms[currentRoomIndex]->onEnter(roomApi);
+    
 }
 
 
@@ -143,7 +144,7 @@ void DungeonEngine::render()
 
     std::cout << "----------- Text Log -----------" << std::endl;
 
-    std::vector<std::string> messages = roomApi.getMessages();
+    //std::vector<std::string> messages = roomApi.getMessages();
 
     for (int i = 4; i > 0; i--)
     {
