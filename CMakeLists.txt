@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 23)
 
 add_subdirectory(rooms)
 add_subdirectory(dungeon)
+add_subdirectory(entities)
 
 ################################################################
 
@@ -20,6 +21,7 @@ target_link_libraries(
             Dungeon
             IRoom
             SpikeTrapRoom
+            Entities
 )
 
 install(
