@@ -1,26 +1,28 @@
 #include "CombatManager.h"
 
-bool CombatManager::handleInput(std::string input, RoomApi& api)
+bool CombatManager::handleInput(char input, RoomApi& api)
 {
 	bool inCombat = true;
 
-	if (input == "A" || input == "a")
-	{
+	switch (std::toupper(input)) {
+	case 'A':
 		api.showMessage("You attacked!");
-	}
-	else if (input == "D" || input == "d")
-	{
+		break;
+	case 'D':
 		api.showMessage("You defended!");
-	}
-	else if (input == "M" || input == "m")
-	{
+		break;
+	case 'M':
 		api.showMessage("You cast a spell!");
-	}
-	else if (input == "I" || input == "i")
-	{
+		break;
+	case 'I':
 		api.showMessage("You used an item!");
+		// setting this to false for now, need to make it false when defeat or victory conditions happen
 		inCombat = false;
-	}
+		break;
+	default:
+		api.showMessage("Please enter a valid action!");
+		break;
 
-	return inCombat;
+		return inCombat;
+	}
 }
