@@ -8,8 +8,9 @@ Player::Player()
 	setDamage(5);
 	setDefense(5);
 
-	Item stick;
-	addItem(stick);
+	Weapon stick;
+	stick.damage = 5;
+	addItem(static_cast<Item&>(stick));
 }
 
 void Player::attack()

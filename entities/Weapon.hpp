@@ -1,7 +1,7 @@
 #pragma once
 #include "Item.hpp"
 
-class Weapon : Item
+class Weapon : public Item
 {
 public: 
 	int damage{};

@@ -1,6 +1,6 @@
 #include "Item.hpp"
 
-class Consumable : Item
+class Consumable : public Item
 {
 public: 
 	int health; 

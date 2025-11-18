@@ -1,7 +1,7 @@
 #pragma once
 #include "Item.hpp"
 
-class Spell : Item
+class Spell : public Item
 {
 public: 
 	int damage{};
