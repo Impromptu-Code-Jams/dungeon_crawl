@@ -23,8 +23,6 @@ class RoomApi
 {
     public:
         RoomApi();
-       
-        std::vector<std::string> getMessages();
 
         void spawnEnemy(int x, int y, EnemyType enemyType);
         std::vector<Enemy> getEnemyList();
