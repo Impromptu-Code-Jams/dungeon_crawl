@@ -7,6 +7,7 @@ class SpikeTrapRoom : public IRoom
 
         std::string const name() const;
         std::vector<std::string> getTileMap() const;
+        void onEnter(RoomApi& api);
 
     private:
         std::vector<std::string> tileMap;

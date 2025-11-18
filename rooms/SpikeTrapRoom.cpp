@@ -20,3 +20,9 @@ std::vector<std::string> SpikeTrapRoom::getTileMap() const
 {
     return tileMap;
 }
+
+void SpikeTrapRoom::onEnter(RoomApi& api)
+{
+    api.showMessage("A goblin appears!");
+    api.spawnEnemy(2, 2, EnemyType::Goblin);
+}

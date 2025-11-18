@@ -41,6 +41,7 @@ void DungeonEngine::start()
 void DungeonEngine::enterRoom(int roomIndex)
 {
     currentRoomIndex = roomIndex;
+    rooms[currentRoomIndex]->onEnter(roomApi);
 }
 
 void DungeonEngine::getInput()
@@ -93,12 +94,30 @@ void DungeonEngine::render()
     std::cout << std::endl;
 
     //
+    // Merge the tile maps.
+    //
+
+    auto tileMap = rooms[currentRoomIndex]->getTileMap();
+    auto enemyList = roomApi.getEnemyList();
+
+    for (int y = 0; y < tileMap.size(); y++)
+    {
+        for (int x = 0; x < tileMap[y].size(); x++)
+        {
+            for (auto enemy : enemyList)
+            {
+                if (enemy.x == x && enemy.y == y)
+                {
+                    tileMap[y][x] = enemy.glyph;
+                }
+            }
+        }
+    }
+
+    //
     // Render the current room.
     //
-    
-    // Copy of the tile map so we can add the dynamic stuff (players, items, etc.).
-    auto tileMap = rooms[currentRoomIndex]->getTileMap();
- 
+
     for(int y = 0; y < tileMap.size(); y++)
     {
         std::cout << tileMap[y] << std::endl;
