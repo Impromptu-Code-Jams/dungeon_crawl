@@ -8,7 +8,6 @@ class IRoom
         virtual ~IRoom() {}
         virtual std::string const name() const = 0;
         virtual std::vector<std::string> getTileMap() const = 0;
-//        virtual std::string const description() const = 0;
 //        virtual void onEnter(Player& player, Dungeon& dungeon) = 0;
 //        virtual void onPlayerStep(Player& player, Dungeon& dungeon) = 0;
 //        virtual void onTick(Player& player, Dungeon& dungeon) = 0;
