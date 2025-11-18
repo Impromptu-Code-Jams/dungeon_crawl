@@ -1,8 +1,13 @@
 project(IRoom)
 
+set(FILES
+    "${PROJECT_SOURCE_DIR}/IRoom.h"
+)
+
 add_library(
     ${PROJECT_NAME}
         INTERFACE
+            ${FILES}
 )
 
 target_include_directories(
@@ -16,13 +21,14 @@ target_include_directories(
 
 project(SpikeTrapRoom)
 
-set(SOURCE_FILES
+set(FILES
+    "${PROJECT_SOURCE_DIR}/SpikeTrapRoom.h"
     "${PROJECT_SOURCE_DIR}/SpikeTrapRoom.cpp"
 )
 
 add_library(
     ${PROJECT_NAME}
-        ${SOURCE_FILES}
+        ${FILES}
 )
 
 target_include_directories(

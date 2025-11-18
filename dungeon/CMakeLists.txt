@@ -2,14 +2,15 @@ cmake_minimum_required(VERSION 3.28)
 
 project(Dungeon)
 
-set(SOURCE_FILES
+set(FILES
+    "${PROJECT_SOURCE_DIR}/DungeonEngine.h"
     "${PROJECT_SOURCE_DIR}/DungeonEngine.cpp"
 )
 
 add_library(
     ${PROJECT_NAME}
         STATIC
-        ${SOURCE_FILES}
+        ${FILES}
         
 )
 

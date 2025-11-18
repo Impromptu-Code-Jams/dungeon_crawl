@@ -65,8 +65,19 @@ gdb -tui _install/bin/DungeonCrawl
 
         - [ ] Dynamic loading at runtime (.dll or .so)
 
-- [ ] Experiment with C++ concepts discussed
+            - [ ] Debuggable in VS from the install directory
+
+- [ ] Experiment with C++ concepts discussed ealier
+
+    - [ ] Rule of 0, 3, 5
+
+    - [ ] Smart pointers
+
+        - [ ] std::move
+
+    - [ ] Unit tests 
 
 **Stretch Goals**
 
-- Colored rendering using ANSI escape sequences.
+- [ ] Colored rendering using ANSI escape sequences.
+
