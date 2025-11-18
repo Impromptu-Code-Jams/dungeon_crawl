@@ -17,6 +17,9 @@ class DungeonEngine
     private:
         void enterRoom(int roomIndex);
 
+        void showMessage(std::string const& message);
+        std::vector<std::string> getMessages();
+
         void handleInput();
         void render();
 
@@ -28,6 +31,7 @@ class DungeonEngine
 
         int currentRoomIndex;
         std::vector<std::unique_ptr<IRoom>> rooms;
+        std::vector<std::string> messages;
         RoomApi roomApi;
 
         bool hasInput;

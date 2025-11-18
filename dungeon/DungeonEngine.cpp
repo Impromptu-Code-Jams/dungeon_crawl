@@ -14,6 +14,11 @@ DungeonEngine::DungeonEngine() :
     inputBuffer("")
 {}
 
+void DungeonEngine::showMessage(std::string const& message)
+{
+    messages.push_back(message);
+}
+
 void DungeonEngine::addRoom(std::unique_ptr<IRoom> room)
 {
     rooms.push_back(std::move(room));
@@ -44,6 +49,12 @@ void DungeonEngine::enterRoom(int roomIndex)
     rooms[currentRoomIndex]->onEnter(roomApi);
 }
 
+
+std::vector<std::string> DungeonEngine::getMessages()
+{
+    return messages;
+}
+
 void DungeonEngine::getInput()
 {
     while (!quit)
@@ -71,7 +82,7 @@ void DungeonEngine::handleInput()
         if(inputBuffer == "m")
         {
             static int x = 1;
-            roomApi.showMessage("Hello There! " + std::to_string(x));
+            showMessage("Hello There! " + std::to_string(x));
             x++;
         }
 
