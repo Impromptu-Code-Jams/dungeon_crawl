@@ -1,35 +1,38 @@
 #pragma once
-
-#include <memory>
-#include <vector>
+#include "CombatManager.h"
 #include "IRoom.h"
 #include "RoomApi.h"
 
+#include <vector>
+#include <memory>
+
 class DungeonEngine
 {
-    public:
-        DungeonEngine();
-        
-        void addRoom(std::unique_ptr<IRoom> room);
-        void start();
+public:
+	DungeonEngine();
 
-    private:
-        void enterRoom(int roomIndex);
+	void addRoom(std::unique_ptr<IRoom> room);
+	void start();
 
-        void handleInput();
-        void render();
+private:
+	void enterRoom(int roomIndex);
 
-        void getInput();
-        void loop();
+	void handleInput();
+	void render();
 
-        bool running;
-        bool quit;
+	void getInput();
+	void loop();
 
-        int currentRoomIndex;
-        std::vector<std::unique_ptr<IRoom>> rooms;
-        RoomApi roomApi;
+	bool running{};
+	bool quit{};
+	bool inCombat{};
 
-        bool hasInput;
-        char inputBuffer;
+	int currentRoomIndex{};
+	std::vector<std::unique_ptr<IRoom>> rooms{};
+	RoomApi roomApi{};
+	std::unique_ptr<CombatManager> combatManager{};
+
+	bool hasInput{};
+	char inputBuffer{};
 };
 
