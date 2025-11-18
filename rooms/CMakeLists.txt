@@ -17,6 +17,12 @@ target_include_directories(
             $<INSTALL_INTERFACE:include>
 )
 
+target_link_libraries(
+    ${PROJECT_NAME}
+        INTERFACE
+            RoomApi
+)
+
 #################################################################
 
 project(SpikeTrapRoom)

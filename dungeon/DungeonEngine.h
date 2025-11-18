@@ -3,6 +3,7 @@
 #include <memory>
 #include <vector>
 #include "IRoom.h"
+#include "RoomApi.h"
 
 class DungeonEngine
 {
@@ -23,10 +24,12 @@ class DungeonEngine
 
         bool running;
         bool quit;
+
         int currentRoomIndex;
         std::vector<std::unique_ptr<IRoom>> rooms;
+        RoomApi roomApi;
+
         bool hasInput;
         std::string inputBuffer;
-        std::vector<std::string> textLog;
 };
 

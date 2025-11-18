@@ -66,10 +66,11 @@ void DungeonEngine::handleInput()
 {
     if(hasInput)
     {
-        if(inputBuffer == "x")
+        if(inputBuffer == "m")
         {
             static int x = 1;
-            textLog.push_back("Hello There! " + std::to_string(x));
+            roomApi.showMessage("Hello There! " + std::to_string(x));
+            x++;
         }
 
         inputBuffer = "";
@@ -111,11 +112,13 @@ void DungeonEngine::render()
 
     std::cout << "----------- Text Log -----------" << std::endl;
 
+    std::vector<std::string> messages = roomApi.getMessages();
+
     for (int i = 4; i > 0; i--)
     {
-        if(static_cast<int>(textLog.size()) - i >= 0)
+        if(static_cast<int>(messages.size()) - i >= 0)
         {
-            std::cout << textLog[textLog.size() - i] << std::endl;
+            std::cout << messages[messages.size() - i] << std::endl;
         }
         else
         {
@@ -144,7 +147,7 @@ void DungeonEngine::render()
     // Render action menu.
     //
 
-    std::cout << "move: [WASD]  quit: [q] " << std::endl;
+    std::cout << "test msg: [m] | quit: [q] " << std::endl;
 }
 
 void DungeonEngine::loop()
@@ -158,7 +161,7 @@ void DungeonEngine::loop()
         int delta = std::chrono::duration_cast<std::chrono::milliseconds>(now - last).count();
 
         int ENGINE_FRAME_MILLISECONDS = 1000;
-        int ENGINE_SLEEP_TIME_MILLISECONDS = 500;
+        int ENGINE_SLEEP_TIME_MILLISECONDS = 100;
 
         if(delta < ENGINE_FRAME_MILLISECONDS)
         {
