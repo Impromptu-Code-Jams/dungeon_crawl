@@ -10,7 +10,7 @@
 DungeonEngine::DungeonEngine() :
 	running(false),
 	quit(false),
-	inCombat(false),
+	inCombat(true),
 	currentRoomIndex(0),
 	hasInput(false),
 	inputBuffer()
@@ -71,7 +71,7 @@ void DungeonEngine::handleInput()
 	{
 		if (inCombat)
 		{
-			if (!combatManager->handleInput(inputBuffer))
+			if (!combatManager->handleInput(inputBuffer, roomApi))
 			{
 				inCombat = false;
 			}
