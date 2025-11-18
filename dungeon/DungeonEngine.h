@@ -30,6 +30,6 @@ class DungeonEngine
         RoomApi roomApi;
 
         bool hasInput;
-        std::string inputBuffer;
+        char inputBuffer;
 };
 
