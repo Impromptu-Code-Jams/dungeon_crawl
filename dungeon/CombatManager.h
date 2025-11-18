@@ -11,5 +11,5 @@ public:
 	CombatManager() = default;
 	RoomApi roomApi{};
 
-	bool handleInput(std::string input, RoomApi& api);
+	bool handleInput(char input, RoomApi& api);
 };
