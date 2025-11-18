@@ -1,28 +1,17 @@
 cmake_minimum_required(VERSION 3.28)
 
-project(RoomApi)
+add_library(RoomApi)
 
-set(FILES
-    "${PROJECT_SOURCE_DIR}/RoomApi.h"
-    "${PROJECT_SOURCE_DIR}/RoomApi.cpp"
-)
-
-add_library(
-    ${PROJECT_NAME}
-        STATIC
-        ${FILES}
-        
-)
-
-target_include_directories(
-    ${PROJECT_NAME}
-        PUBLIC
-            ${PROJECT_SOURCE_DIR}
+target_sources(RoomApi
+    PRIVATE RoomApi.cpp
+    PUBLIC FILE_SET HEADERS
+    BASE_DIRS .
+    FILES RoomApi.h
 )
 
 ################################################################
 
-project(Dungeon)
+add_library(Dungeon)
 
 set(FILES
     "${PROJECT_SOURCE_DIR}/CombatManager.h"
@@ -45,7 +34,7 @@ target_include_directories(
 )
 
 target_link_libraries(
-    ${PROJECT_NAME}
+    Dungeon
         PRIVATE
             IRoom
 )
