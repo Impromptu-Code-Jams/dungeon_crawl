@@ -17,7 +17,9 @@ target_sources(Dungeon
     PRIVATE DungeonEngine.cpp
     PUBLIC FILE_SET HEADERS
     BASE_DIRS .
-    FILES DungeonEngine.h
+    FILES
+        entities/Entity.h
+        DungeonEngine.h
 )
 
 target_link_libraries(
