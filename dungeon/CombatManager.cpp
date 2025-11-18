@@ -18,8 +18,6 @@ bool CombatManager::handleInput(char input, RoomApi& api)
 	case 'I':
 		itemMenuActive = true;
 		magicMenuActive = false;
-		// setting this to false for now, need to make it false when defeat or victory conditions happen
-		inCombat = false;
 		break;
 	default:
 		api.showMessage("Please enter a valid action!");
@@ -52,5 +50,5 @@ bool CombatManager::handleInput(char input, RoomApi& api)
 		//}
 	}
 
-		return inCombat;
+	return inCombat;
 }
