@@ -11,24 +11,22 @@ target_sources(RoomApi
 
 ################################################################
 
-add_library(Dungeon)
-
 set(FILES
-    "${PROJECT_SOURCE_DIR}/CombatManager.h"
-    "${PROJECT_SOURCE_DIR}/CombatManager.cpp"
-    "${PROJECT_SOURCE_DIR}/DungeonEngine.h"
-    "${PROJECT_SOURCE_DIR}/DungeonEngine.cpp"
+    "CombatManager.h"
+    "CombatManager.cpp"
+    "DungeonEngine.h"
+    "DungeonEngine.cpp"
 )
 
 add_library(
-    ${PROJECT_NAME}
+    Dungeon
         STATIC
         ${FILES}
         
 )
 
 target_include_directories(
-    ${PROJECT_NAME}
+    Dungeon
         PUBLIC
             ${PROJECT_SOURCE_DIR}
 )
