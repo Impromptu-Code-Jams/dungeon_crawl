@@ -27,6 +27,7 @@ project(Dungeon)
 set(FILES
     "${PROJECT_SOURCE_DIR}/DungeonEngine.h"
     "${PROJECT_SOURCE_DIR}/DungeonEngine.cpp"
+    "${PROJECT_SOURCE_DIR}/GetCh.h"
 )
 
 add_library(

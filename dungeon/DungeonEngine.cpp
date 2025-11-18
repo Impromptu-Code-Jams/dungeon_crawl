@@ -2,10 +2,10 @@
 #include <chrono>
 #include <utility>
 #include <thread>
-#include <conio.h>
 
 #include "DungeonEngine.h"
 #include "IRoom.h"
+#include "GetCh.h"
 
 DungeonEngine::DungeonEngine() :
     running(false),
@@ -49,7 +49,7 @@ void DungeonEngine::getInput()
 {
     while (!quit)
     {
-        inputBuffer = _getch();
+        inputBuffer = getSingleChar();
 
         if (inputBuffer == 'q')
         {
@@ -73,7 +73,7 @@ void DungeonEngine::handleInput()
             x++;
         }
 
-        inputBuffer = '/n';
+        inputBuffer = 0;
         hasInput = false;
     }
 }
