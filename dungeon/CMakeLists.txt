@@ -14,10 +14,13 @@ target_sources(RoomApi
 add_library(Dungeon)
 
 target_sources(Dungeon
-    PRIVATE DungeonEngine.cpp
+    PRIVATE
+      DungeonEngine.cpp
+      GetCh.h
     PUBLIC FILE_SET HEADERS
     BASE_DIRS .
-    FILES DungeonEngine.h
+    FILES 
+        DungeonEngine.h
 )
 
 target_link_libraries(

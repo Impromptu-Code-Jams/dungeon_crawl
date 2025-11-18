@@ -5,13 +5,14 @@
 
 #include "DungeonEngine.h"
 #include "IRoom.h"
+#include "GetCh.h"
 
 DungeonEngine::DungeonEngine() :
     running(false),
     quit(false),
     currentRoomIndex(0),
     hasInput(false),
-    inputBuffer("")
+    inputBuffer()
 {}
 
 void DungeonEngine::addRoom(std::unique_ptr<IRoom> room)
@@ -48,11 +49,9 @@ void DungeonEngine::getInput()
 {
     while (!quit)
     {
-        std::string line;
-        std::getline(std::cin, line);
-        inputBuffer = line;
+        inputBuffer = getSingleChar();
 
-        if (inputBuffer == "q")
+        if (inputBuffer == 'q')
         {
             quit = true;
         }
@@ -67,14 +66,14 @@ void DungeonEngine::handleInput()
 {
     if(hasInput)
     {
-        if(inputBuffer == "m")
+        if(inputBuffer == 'm')
         {
             static int x = 1;
             roomApi.showMessage("Hello There! " + std::to_string(x));
             x++;
         }
 
-        inputBuffer = "";
+        inputBuffer = 0;
         hasInput = false;
     }
 }
