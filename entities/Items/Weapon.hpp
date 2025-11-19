@@ -4,6 +4,8 @@
 class Weapon : public Item
 {
 public: 
+	Weapon() { type = WEAPON; }
 	int damage{};
 	double critChance{};
+	
 };

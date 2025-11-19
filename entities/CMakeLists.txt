@@ -8,10 +8,11 @@ set(SOURCE_FILES
 
 set(HEADER_FILES
     "${PROJECT_SOURCE_DIR}/Player.hpp"
-    "${PROJECT_SOURCE_DIR}/Consumable.hpp"
-    "${PROJECT_SOURCE_DIR}/Weapon.hpp"
-    "${PROJECT_SOURCE_DIR}/Spell.hpp"    
-    "${PROJECT_SOURCE_DIR}/Entity.h"
+    "${PROJECT_SOURCE_DIR}/Items/Consumable.hpp"
+    "${PROJECT_SOURCE_DIR}/Items/Weapon.hpp"
+    "${PROJECT_SOURCE_DIR}/Items/Spell.hpp"  
+    "${PROJECT_SOURCE_DIR}/Items/Shield.hpp"  
+    "${PROJECT_SOURCE_DIR}/Items/Spell.hpp"  
 )
 
 add_library(
