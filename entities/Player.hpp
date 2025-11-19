@@ -1,9 +1,5 @@
 #pragma once
-#include "Items/Item.hpp"
-#include "Items/Weapon.hpp"
-#include "Items/Spell.hpp"
-#include "Items/Consumable.hpp"
-#include "Items/Shield.hpp"
+#include "Item.hpp"
 #include "Entity.h"
 #include <vector>
 #include <iostream>
@@ -30,6 +26,8 @@ class Player : Entity
 	void addItem(Item& item);
 	void changeWeapon(int weaponIndex);
 	void useConsumable(int consumeIndex); 
+	void applyEffect(Effect& effect) override;
+	void removeEffect(Effect& effect) override; 
 	void blockNextAttack() { block = true; }
 
 	const std::vector<Spell>& getSpells() const { return inventory.spells; }
@@ -40,7 +38,10 @@ private:
 	int xp; 
 	Inventory inventory;
 	std::optional<Weapon> currentWeapon;
+	bool canUseWeapon{ true };
+
 	std::optional<Shield> currentShield;
+	bool canUseShield{ true };
 	
 	bool block = false;
 };
