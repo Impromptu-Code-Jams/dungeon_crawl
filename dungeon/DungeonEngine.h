@@ -2,6 +2,7 @@
 #include "CombatManager.h"
 #include "IRoom.h"
 #include "RoomApi.h"
+#include "CombatManager.h"
 
 #include <vector>
 #include <memory>
@@ -25,7 +26,7 @@ private:
 
 	bool running{};
 	bool quit{};
-	bool inCombat{};
+	bool inCombat{false};
 
 	int currentRoomIndex{};
 	std::vector<std::unique_ptr<IRoom>> rooms{};

@@ -6,12 +6,14 @@ set(CMAKE_CXX_STANDARD 23)
 
 add_subdirectory(rooms)
 add_subdirectory(dungeon)
+add_subdirectory(entities)
 
 ################################################################
 
 add_executable(
     DungeonCrawl
         main.cpp
+        dungeon/CombatManager.cpp
 )
 
 target_link_libraries(
@@ -20,6 +22,7 @@ target_link_libraries(
             Dungeon
             IRoom
             SpikeTrapRoom
+            Entities
 )
 
 install(
