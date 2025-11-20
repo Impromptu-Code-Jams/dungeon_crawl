@@ -25,7 +25,7 @@ target_sources(Dungeon
 
 target_link_libraries(
     Dungeon
-        PRIVATE
+        PUBLIC
             IRoom
 )
 

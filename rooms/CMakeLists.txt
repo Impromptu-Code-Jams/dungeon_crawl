@@ -26,7 +26,7 @@ target_sources(SpikeTrapRoom
 
 target_link_libraries(
     SpikeTrapRoom
-        PRIVATE
+        PUBLIC
             IRoom
 )
 
