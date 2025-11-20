@@ -11,7 +11,7 @@ SpikeTrapRoom::SpikeTrapRoom()
     };
 }
 
-std::string const SpikeTrapRoom::name() const
+std::string SpikeTrapRoom::name() const
 {
     return "SpikeTrapRoom";
 }

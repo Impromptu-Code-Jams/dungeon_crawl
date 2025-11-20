@@ -34,3 +34,5 @@ install(
     TARGETS
         SpikeTrapRoom
 )
+
+add_subdirectory(tests)
