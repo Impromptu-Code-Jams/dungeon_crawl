@@ -18,7 +18,7 @@ public:
 private:
 	bool magicMenuActive{ false };
 	bool itemMenuActive{ false };
-
+	bool playerIsBlocking{ false };
 	std::unique_ptr<Enemy> player;
 	std::unique_ptr<Enemy> enemy;
 };
