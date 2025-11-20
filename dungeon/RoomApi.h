@@ -38,12 +38,10 @@ public:
 	void spawnEnemy(int x, int y, EnemyType enemyType);
 	std::vector<Enemy> getEnemyList();
 
-        void updateEnemies(int playerX, int playerY);
+    void updateEnemies(int playerX, int playerY);
 
-        void updateEnemies(int playerX, int playerY);
-
-    private:
-        std::vector<std::string> messages;
-        std::vector<Enemy> enemyList;
+private:
+    std::vector<std::string> messages;
+    std::vector<Enemy> enemyList;
 };
 
