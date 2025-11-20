@@ -21,6 +21,7 @@ target_sources(Dungeon
     BASE_DIRS .
     FILES 
         DungeonEngine.h
+        entities/Entity.h
 )
 
 target_link_libraries(
