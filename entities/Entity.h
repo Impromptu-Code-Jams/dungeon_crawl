@@ -8,8 +8,8 @@ enum Status { ALIVE, DEAD };
 class Entity {
 public:
     virtual std::optional<int> attack() = 0;
-    virtual std::optional<int> castSpell() = 0;
-    virtual Status applyDamage(int damageAmount) = 0;
+    virtual std::optional<int> castSpell(int index) = 0;
+    virtual Status applyDamage(const int damageAmount) = 0;
 
     // Update loop for effects 
     void update()
@@ -28,28 +28,25 @@ public:
         }
     }
 
-    virtual void applyEffect(Effect& effect)
+    void applyEffect(Effect& effect)
     {
         effect.duration--; // Is being used 
 
-        switch (effect.type) {
-        case(Effect::FIRE): {
-            setHealth(getHealth() - dynamic_cast<Fire&>(effect).damage);
+        switch (effect.type) 
+        {
+        case (Effect::STRENGTH_EFFECT): {
+            tempDamageMod += dynamic_cast<StrengthEffect&>(effect).modifierValue;
             break;
         }
-        case (Effect::STRENGTH_MOD): {
-            tempDamageMod += dynamic_cast<StrengthMod&>(effect).mod;
+        case (Effect::DEFENSE_EFFECT): {
+            tempDefenseMod += dynamic_cast<DefenseEffect&>(effect).modifierValue;
             break;
         }
-        case (Effect::DEFENSE_MOD): {
-            tempDefenseMod += dynamic_cast<DefenseMod&>(effect).mod;
+        case (Effect::HEALTH_EFFECT): {
+            setHealth(getHealth() + dynamic_cast<HealthEffect&>(effect).modifierValue);
             break;
         }
-        case (Effect::HEALTH_MOD): {
-            setHealth(getHealth() + dynamic_cast<HealthMod&>(effect).mod);
-            break;
-        }
-        case (Effect::BLOCK_MAGIC): {
+        case (Effect::MANA_EFFECT): {
             canUseMana = false;
             break;
         }
@@ -62,18 +59,18 @@ public:
         }
     }
     
-    virtual void removeEffect(Effect& effect)
+    void removeEffect(Effect& effect)
     {
         switch (effect.type) {
-        case (Effect::STRENGTH_MOD): {
-            tempDamageMod -= dynamic_cast<StrengthMod&>(effect).mod;
+        case (Effect::STRENGTH_EFFECT): {
+            tempDamageMod -= dynamic_cast<StrengthEffect&>(effect).modifierValue;
             break;
         }
-        case (Effect::DEFENSE_MOD): {
-            tempDefenseMod -= dynamic_cast<DefenseMod&>(effect).mod;
+        case (Effect::DEFENSE_EFFECT): {
+            tempDefenseMod -= dynamic_cast<DefenseEffect&>(effect).modifierValue;
             break;
         }
-        case (Effect::BLOCK_MAGIC): {
+        case (Effect::MANA_EFFECT): {
             canUseMana = true;
             break;
         }
@@ -119,5 +116,5 @@ private:
     // Scaling attribute
     int level{};
 
-    std::vector<Effect > effects{};
-}; 
+    std::vector<Effect> effects{};
+};

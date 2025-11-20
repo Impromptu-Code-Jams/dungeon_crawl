@@ -125,25 +125,3 @@ void Player::changeShield(int shieldIndex)
 		currentShield = inventory.shields.at(shieldIndex);
 	}
 }
-
-void Player::applyEffect(Effect& effect)
-{
-	Entity::applyEffect(effect); 
-
-	if (effect.type == Effect::DISARM)
-	{
-		canUseWeapon = false;
-		canUseShield = true;
-	}
-}
-
-void Player::removeEffect(Effect& effect)
-{
-	Entity::removeEffect(effect); 
-
-	if (effect.type == Effect::DISARM)
-	{
-		canUseWeapon = true; 
-		canUseShield = true;
-	}
-}

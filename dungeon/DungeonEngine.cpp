@@ -16,6 +16,8 @@ DungeonEngine::DungeonEngine() :
 	inputBuffer()
 {
 	combatManager = std::make_unique<CombatManager>();
+	player = std::make_shared<Player>();
+	enemy = std::make_shared<Player>();
 }
 
 void DungeonEngine::addRoom(std::unique_ptr<IRoom> room)
@@ -71,7 +73,7 @@ void DungeonEngine::handleInput()
 	{
 		if (inCombat)
 		{
-			if (!combatManager->handleInput(inputBuffer, roomApi))
+			if (!combatManager->handleInput(inputBuffer, roomApi, player, enemy))
 			{
 				inCombat = false;
 			}
