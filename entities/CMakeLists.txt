@@ -4,12 +4,14 @@ project(Entities)
 
 set(SOURCE_FILES
     "${PROJECT_SOURCE_DIR}/Player.cpp"
+    "${PROJECT_SOURCE_DIR}/Enemy.cpp"
 )
 
 set(HEADER_FILES
     "${PROJECT_SOURCE_DIR}/Player.hpp"
     "${PROJECT_SOURCE_DIR}/Item.hpp"
     "${PROJECT_SOURCE_DIR}/Effect.hpp"
+    "${PROJECT_SOURCE_DIR}/Enemy.hpp"
 
 )
 

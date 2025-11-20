@@ -29,7 +29,7 @@ std::optional<int> Player::attack()
 	std::optional<int> damageDealt; 
 
 	// Check if the player has a weapon equipped
-	if (currentWeapon.has_value() && !block && canUseWeapon)
+	if (currentWeapon.has_value() && !isBlocking() && canUseWeapon)
 	{
 		damageDealt = std::make_optional<int>(currentWeapon.value().damage);
 	}
@@ -60,7 +60,7 @@ std::optional<int> Player::castSpell(int index)
 
 Status Player::applyDamage(int damageAmount)
 {
-	if (block && canUseShield && currentShield.has_value())
+	if (isBlocking() && canUseShield && currentShield.has_value())
 	{
 		damageAmount -= (damageAmount * currentShield.value().blockPercent);
 	}
@@ -73,41 +73,6 @@ Status Player::applyDamage(int damageAmount)
 void Player::addXp(int xpAdd)
 {
 
-}
-
-void Player::addItem(Item& item)
-{
-	switch (item.type)
-	{
-	case (Item::CONSUMABLE): {
-		Consumable& consumable = dynamic_cast<Consumable&>(item);
-		inventory.consumables.emplace_back(consumable);
-		break;
-	}
-	case (Item::WEAPON): {
-		Weapon& weapon = dynamic_cast<Weapon&>(item);
-		inventory.weapons.emplace_back(weapon);
-		break;
-	}
-	case (Item::SPELL): {
-		Spell& spell = dynamic_cast<Spell&>(item);
-		inventory.spells.emplace_back(spell);
-		break;
-	}
-	case (Item::SHIELD): {
-		Shield& shield = dynamic_cast<Shield&>(item);
-		inventory.shields.emplace_back(shield);
-		break;
-	}
-	}
-}
-
-void Player::useConsumable(int consumeIndex)
-{
-	if (consumeIndex < inventory.consumables.size())
-	{
-		applyEffect(inventory.consumables.at(consumeIndex).effect);
-	}
 }
 
 void Player::changeWeapon(int weaponIndex)
@@ -123,27 +88,5 @@ void Player::changeShield(int shieldIndex)
 	if (shieldIndex < inventory.shields.size())
 	{
 		currentShield = inventory.shields.at(shieldIndex);
-	}
-}
-
-void Player::applyEffect(Effect& effect)
-{
-	Entity::applyEffect(effect); 
-
-	if (effect.type == Effect::DISARM)
-	{
-		canUseWeapon = false;
-		canUseShield = true;
-	}
-}
-
-void Player::removeEffect(Effect& effect)
-{
-	Entity::removeEffect(effect); 
-
-	if (effect.type == Effect::DISARM)
-	{
-		canUseWeapon = true; 
-		canUseShield = true;
 	}
 }

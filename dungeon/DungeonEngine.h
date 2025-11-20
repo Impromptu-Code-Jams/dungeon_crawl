@@ -26,7 +26,7 @@ private:
 
 	bool running{};
 	bool quit{};
-	bool inCombat{false};
+	bool inCombat{true};
 
 	int currentRoomIndex{};
 	std::vector<std::unique_ptr<IRoom>> rooms{};

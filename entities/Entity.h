@@ -1,15 +1,65 @@
 #pragma once
 #include <optional>
+#include <ranges>
 #include <unordered_map>
 #include "Effect.hpp"
+#include "Item.hpp"
 
 enum Status { ALIVE, DEAD };
+
+struct Inventory
+{
+    std::vector<Consumable> consumables;
+    std::vector<Weapon> weapons;
+    std::vector<Shield> shields;
+    std::vector<Spell> spells;
+};
 
 class Entity {
 public:
     virtual std::optional<int> attack() = 0;
     virtual std::optional<int> castSpell() = 0;
     virtual Status applyDamage(int damageAmount) = 0;
+    
+    void blockNextAttack() { block = true; }
+
+    // Use a consumable from the inventory
+    void useConsumable(int consumeIndex)
+    {
+        if (consumeIndex < inventory.consumables.size())
+        {
+            applyEffect(inventory.consumables.at(consumeIndex).effect, true);
+            inventory.consumables.erase(inventory.consumables.begin() + consumeIndex);
+        }
+    }
+
+    // Add an item to the inventory
+    void addItem(Item& item)
+    {
+        switch (item.type)
+        {
+        case (Item::CONSUMABLE): {
+            Consumable& consumable = dynamic_cast<Consumable&>(item);
+            inventory.consumables.emplace_back(consumable);
+            break;
+        }
+        case (Item::WEAPON): {
+            Weapon& weapon = dynamic_cast<Weapon&>(item);
+            inventory.weapons.emplace_back(weapon);
+            break;
+        }
+        case (Item::SPELL): {
+            Spell& spell = dynamic_cast<Spell&>(item);
+            inventory.spells.emplace_back(spell);
+            break;
+        }
+        case (Item::SHIELD): {
+            Shield& shield = dynamic_cast<Shield&>(item);
+            inventory.shields.emplace_back(shield);
+            break;
+        }
+        }
+    }
 
     // Update loop for effects 
     void update()
@@ -20,15 +70,15 @@ public:
             // Check if the turns for the effect are up
             if (itr->duration == 0)
             {
-                itr = effects.erase(itr);
+                removeEffect(*itr);
                 continue;
             }
-            applyEffect(*itr);
+            applyEffect(*itr, true);
             itr++;
         }
     }
 
-    virtual void applyEffect(Effect& effect)
+    virtual void applyEffect(Effect& effect, bool updatingEffect)
     {
         effect.duration--; // Is being used 
 
@@ -53,10 +103,14 @@ public:
             canUseMana = false;
             break;
         }
+        case (Effect::DISARM): {
+            canUseShield = false; 
+
+        }
         }
 
         // If it's a multi-turn effect, add it
-        if (effect.duration > 0)
+        if (effect.duration > 0 && !updatingEffect)
         {
             effects.emplace_back(effect);
         }
@@ -77,6 +131,11 @@ public:
             canUseMana = true;
             break;
         }
+        case (Effect::DISARM):
+        {
+            canUseWeapon = true;
+            canUseShield = true;
+        }
         }
     }
 
@@ -86,6 +145,7 @@ public:
     bool getCanUseMana() { return canUseMana; } // changed by effects only
     int getDamage() { return damage; }
     int getDefense() { return defense; }
+    bool isBlocking() { return block; }
     Status getStatus() { return status; }
 
     // Entity attribute setters
@@ -98,6 +158,21 @@ public:
     void setDamage(int newDamage) { damage = newDamage; }
     void setDefense(int newDefense) { defense = newDefense; }
     void setStatus(Status st) { status = st; }
+
+    // Inventory accessors
+    const std::vector<Spell>& getSpells() const { return inventory.spells; }
+    const std::vector<Weapon>& getWeapons() const { return inventory.weapons; }
+    const std::vector<Consumable>& getConsumables() const { return inventory.consumables; }
+    const std::vector<Shield>& getShields() const { return inventory.shields; }
+
+protected:
+    // Inventory management
+    Inventory inventory;
+
+    std::optional<Weapon> currentWeapon;
+    bool canUseWeapon{ true };
+    std::optional<Shield> currentShield;
+    bool canUseShield{ true };
 
 private:
     // Health trackers 
@@ -115,9 +190,12 @@ private:
     int tempDamageMod{};
     int defense{};
     int tempDefenseMod{};
+    bool block{};
 
     // Scaling attribute
     int level{};
 
+    // Effects being applied to the player 
     std::vector<Effect > effects{};
+
 }; 
