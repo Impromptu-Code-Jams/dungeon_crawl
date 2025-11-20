@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include <vector>
 #include <iostream>
+#include <optional>
 
 struct Inventory
 {
@@ -12,15 +13,14 @@ struct Inventory
 	std::vector<Spell> spells;
 };
 
-class Player : Entity
+class Player : public Entity
 {
 public: 
-	Player(); 
-
+	Player();
 	// Inherited functions
-	std::optional<int> attack();
-	std::optional<int> castSpell(int index);
-	Status applyDamage(const int damageAmount);
+	std::optional<int> attack() override;
+	std::optional<int> castSpell(int index) override;
+	Status applyDamage(const int damageAmount) override;
 
 	// Player attributes & inventory
 	void addXp(int xpAdd);
@@ -28,8 +28,6 @@ public:
 	void changeWeapon(int weaponIndex);
 	void changeShield(int shieldIndex);
 	void useConsumable(int consumeIndex); 
-	void applyEffect(Effect& effect) override;
-	void removeEffect(Effect& effect) override; 
 	void blockNextAttack() { block = true; }
 
 	const std::vector<Spell>& getSpells() const { return inventory.spells; }

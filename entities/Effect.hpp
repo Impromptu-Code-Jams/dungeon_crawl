@@ -4,50 +4,39 @@
 struct Effect
 {
 public: 
-	enum Type { FIRE, STRENGTH_MOD, DEFENSE_MOD, HEALTH_MOD, BLOCK_MAGIC, DISARM };
-	virtual ~Effect() = default;;
-
-	std::string name{};
+	enum Type {STRENGTH_EFFECT, DEFENSE_EFFECT, HEALTH_EFFECT, MANA_EFFECT};
+	virtual ~Effect() = default;
 	int duration{};
 	Type type{};
 };
 
-struct Fire : public Effect
-{
-public: 
-	Fire() { type = FIRE; }
-	int damage{}; 
-};
-
-struct StrengthMod : public Effect
+struct StrengthEffect : public Effect
 {
 public:
-	StrengthMod() { type = STRENGTH_MOD; }
-	int mod{}; 
+	StrengthEffect(int modValue) { modifierValue = modValue; }
+	Type type{ STRENGTH_EFFECT };
+	int modifierValue{}; 
 };
 
-struct DefenseMod : public Effect
+struct DefenseEffect : public Effect
 {
 public: 
-	DefenseMod() { type = DEFENSE_MOD; }
-	int mod{};
+	DefenseEffect(int modValue) { modifierValue = modValue;	}
+	Type type{ DEFENSE_EFFECT };
+	int modifierValue{};
 };
 
-struct HealthMod : public Effect
+struct HealthEffect : public Effect
 {
 public: 
-	HealthMod() { type = HEALTH_MOD; }
-	int mod{};
+	HealthEffect(int modValue) { modifierValue = modValue; }
+	Type type{ HEALTH_EFFECT };
+	int modifierValue{};
 };
 
-struct BlockMagic : public Effect
+struct ManaEffect : public Effect
 {
-public: 
-	BlockMagic() { type = BLOCK_MAGIC; }
-};
-
-struct Disarm : public Effect
-{
-public: 
-	Disarm() { type = DISARM; }
+	ManaEffect(int modValue) { modifierValue = modValue; }
+	Type type{ MANA_EFFECT };
+	int modifierValue{};
 };

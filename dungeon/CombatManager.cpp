@@ -1,29 +1,15 @@
 #include "CombatManager.h"
 
-bool CombatManager::handleInput(char input, RoomApi& api)
+std::optional<Action> CombatManager::handleInput(char input, RoomApi& api, std::shared_ptr<Player> player, std::shared_ptr < Entity> enemy)
 {
-	bool inCombat = true;
-
+	std::optional<Action> playerAction;
 	switch (std::toupper(input)) {
 	case 'A': {
-		std::optional<int> damage = player->attack();
-		if (damage.has_value())
-		{
-			enemy->applyDamage(damage.value());
-			if (enemy->getHealth() <= 0)
-			{
-				api.showMessage("Enemy defeated!");
-				inCombat = false;
-			}
-			else
-			{
-				api.showMessage("You attacked the enemy!");
-			}
-		}
+		//playerAction = player->attackAction();
 		break;
 	}
 	case 'D':
-		playerIsBlocking = true;
+		//playerAction = player->defendAction();
 		break;
 	case 'M':
 		magicMenuActive = true;
@@ -40,31 +26,24 @@ bool CombatManager::handleInput(char input, RoomApi& api)
 
 	if (magicMenuActive && isdigit(input))
 	{
-		//int damage = player->castSpell(static_cast<int>(input));
-		//if (damage > -1)
-		//{
-		//	enemy->applyDamage(damage);
-		//	if (enemy->health <= 0)
-		//	{
-		//		api.showMessage("Enemy defeated!");
-		//		inCombat = false;
-		//	}
-		//	api.showMessage("You cast a spell!");
-		//	magicMenuActive = false;
-		//}
+		//playerAction = player->castSpell(static_cast<int>(input));
+		
+		if (playerAction.has_value())
+		{
+			magicMenuActive = false;
+		}
+		
 	}
-	else if (itemMenuActive && isdigit(input))
+	else if (itemMenuActive && isdigit(static_cast<int>(input)))
 	{
-		//int item = player->getItem(static_cast<int>(input));
-		//if (item > -1)
-		//{
-		//	player->useItem(item);
-		//	itemMenuActive = false;
-		//	api.showMessage("You used an item!");
-		//}
+		//playerAction = player->useConsumable(static_cast<int>(input));
+		if (playerAction.has_value())
+		{
+			itemMenuActive = false;
+		}
 	}
 
-	return inCombat;
+	return playerAction;
 }
 
 void goto_xy(int x, int y)
@@ -119,10 +98,7 @@ void CombatManager::printMenu(const std::vector<std::string>& menu, int x, int y
 }
 
 void CombatManager::display(int x, int y)
-{
-    itemMenuActive = true; // temp
-    magicMenuActive = true; // temp
-    
+{   
     std::vector<std::string> mainMenu = createMainMenu();
     int rowNum = 0;
     printMenu(mainMenu, x, y, rowNum);

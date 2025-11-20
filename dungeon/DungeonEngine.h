@@ -2,7 +2,8 @@
 #include "CombatManager.h"
 #include "IRoom.h"
 #include "RoomApi.h"
-#include "CombatManager.h"
+#include "entities/Player.hpp"
+#include "entities/Entity.h"
 
 #include <vector>
 #include <memory>
@@ -32,7 +33,8 @@ private:
 	std::vector<std::unique_ptr<IRoom>> rooms{};
 	RoomApi roomApi{};
 	std::unique_ptr<CombatManager> combatManager{};
-
+	std::shared_ptr<Player> player;
+	std::shared_ptr<Player> enemy;
 	bool hasInput{};
 	char inputBuffer{};
 };
