@@ -9,10 +9,10 @@ enum Status { ALIVE, DEAD };
 
 struct Inventory
 {
-    std::vector<Consumable> consumables;
-    std::vector<Weapon> weapons;
-    std::vector<Shield> shields;
-    std::vector<Spell> spells;
+    std::unordered_map<std::string, Consumable> consumables;
+    std::unordered_map<std::string, Weapon> weapons;
+    std::unordered_map<std::string, Shield> shields;
+    std::unordered_map<std::string, Spell> spells;
 };
 
 class Entity {
@@ -24,12 +24,12 @@ public:
     void blockNextAttack() { block = true; }
 
     // Use a consumable from the inventory
-    void useConsumable(int consumeIndex)
+    void useConsumable(std::string consumeName)
     {
-        if (consumeIndex < inventory.consumables.size())
+        if (inventory.consumables.size())
         {
-            applyEffect(inventory.consumables.at(consumeIndex).effect, true);
-            inventory.consumables.erase(inventory.consumables.begin() + consumeIndex);
+            applyEffect(inventory.consumables.at(consumeName).effect, true);
+            inventory.consumables.erase(consumeName);
         }
     }
 
@@ -40,22 +40,22 @@ public:
         {
         case (Item::CONSUMABLE): {
             Consumable& consumable = dynamic_cast<Consumable&>(item);
-            inventory.consumables.emplace_back(consumable);
+            inventory.consumables.emplace(consumable.name, consumable);
             break;
         }
         case (Item::WEAPON): {
             Weapon& weapon = dynamic_cast<Weapon&>(item);
-            inventory.weapons.emplace_back(weapon);
+            inventory.weapons.emplace(weapon.name, weapon);
             break;
         }
         case (Item::SPELL): {
             Spell& spell = dynamic_cast<Spell&>(item);
-            inventory.spells.emplace_back(spell);
+            inventory.spells.emplace(spell.name, spell);
             break;
         }
         case (Item::SHIELD): {
             Shield& shield = dynamic_cast<Shield&>(item);
-            inventory.shields.emplace_back(shield);
+            inventory.shields.emplace(shield.name, shield);
             break;
         }
         }
@@ -83,10 +83,6 @@ public:
         effect.duration--; // Is being used 
 
         switch (effect.type) {
-        case(Effect::FIRE): {
-            setHealth(getHealth() - dynamic_cast<Fire&>(effect).damage);
-            break;
-        }
         case (Effect::STRENGTH_MOD): {
             tempDamageMod += dynamic_cast<StrengthMod&>(effect).mod;
             break;
@@ -139,9 +135,15 @@ public:
         }
     }
 
+    int x{};
+    int y{};
+    char glyph{};
+
     // Entity attribute headers 
     int getHealth() { return health; }
+    int getMaxHealth() { return maxHealth; }
     int getMana() { return mana; } 
+    int getMaxMana() { return maxMana; }
     bool getCanUseMana() { return canUseMana; } // changed by effects only
     int getDamage() { return damage; }
     int getDefense() { return defense; }
@@ -160,10 +162,10 @@ public:
     void setStatus(Status st) { status = st; }
 
     // Inventory accessors
-    const std::vector<Spell>& getSpells() const { return inventory.spells; }
-    const std::vector<Weapon>& getWeapons() const { return inventory.weapons; }
-    const std::vector<Consumable>& getConsumables() const { return inventory.consumables; }
-    const std::vector<Shield>& getShields() const { return inventory.shields; }
+    const std::unordered_map<std::string, Spell>& getSpells() const { return inventory.spells; }
+    const std::unordered_map<std::string, Weapon>& getWeapons() const { return inventory.weapons; }
+    const std::unordered_map<std::string, Consumable> & getConsumables() const { return inventory.consumables; }
+    const std::unordered_map<std::string, Shield>& getShields() const { return inventory.shields; }
 
 protected:
     // Inventory management

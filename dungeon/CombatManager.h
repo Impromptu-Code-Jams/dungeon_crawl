@@ -4,10 +4,10 @@
 #include <vector>
 #include <string>
 #include <memory>
-#include "RoomApi.h"
 #include <iostream>
 
 #include "entities/Player.hpp"
+#include "entities/Enemy.hpp"
 #include "entities/Entity.h"
 
 class CombatManager

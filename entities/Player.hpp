@@ -12,13 +12,13 @@ public:
 
 	// Inherited functions
 	std::optional<int> attack();
-	std::optional<int> castSpell(int index);
-	Status applyDamage(const int damageAmount);
+	std::optional<int> castSpell(std::string spellName);
+	Status applyDamage(int damageAmount);
 
 	// Player attributes & inventory
 	void addXp(int xpAdd);
-	void changeWeapon(int weaponIndex);
-	void changeShield(int shieldIndex); 
+	void changeWeapon(std::string weaponName);
+	void changeShield(std::string shieldName); 
 
 private: 
 	int xp{};

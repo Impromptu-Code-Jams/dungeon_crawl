@@ -112,7 +112,7 @@ void DungeonEngine::render()
 	{
 		for (int x = 0; x < tileMap[y].size(); x++)
 		{
-			for (auto enemy : enemyList)
+			for (auto& enemy : enemyList)
 			{
 				if (enemy.x == x && enemy.y == y)
 				{

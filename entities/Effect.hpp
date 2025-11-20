@@ -4,19 +4,12 @@
 struct Effect
 {
 public: 
-	enum Type { FIRE, STRENGTH_MOD, DEFENSE_MOD, HEALTH_MOD, BLOCK_MAGIC, DISARM };
+	enum Type { STRENGTH_MOD, DEFENSE_MOD, HEALTH_MOD, BLOCK_MAGIC, DISARM };
 	virtual ~Effect() = default;;
 
 	std::string name{};
 	int duration{};
 	Type type{};
-};
-
-struct Fire : public Effect
-{
-public: 
-	Fire() { type = FIRE; }
-	int damage{}; 
 };
 
 struct StrengthMod : public Effect

@@ -4,20 +4,11 @@
 #include <vector>
 #include <string>
 
+#include "../entities/Enemy.hpp"
+
 enum EnemyType
 {
 	Goblin
-};
-
-struct Enemy
-{
-	EnemyType type;
-	int x;
-	int y;
-	int hp;
-	int atk;
-	int def;
-	char glyph;
 };
 
 class RoomApi

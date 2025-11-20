@@ -43,16 +43,16 @@ std::optional<int> Player::attack()
 	return damageDealt;
 }
 
-std::optional<int> Player::castSpell(int index)
+std::optional<int> Player::castSpell(std::string spellName)
 {
 	std::optional<int> spellDamage; 
 
 	// The player can cast, the spell exists and there's enough mana for the action
 	if (getCanUseMana() && 
-		index < inventory.spells.size() && 
-		getMana() - inventory.spells.at(index).manaCost >= 0)
+		inventory.spells.contains(spellName) &&
+		getMana() - inventory.spells.at(spellName).manaCost >= 0)
 	{
-		spellDamage = std::make_optional<int>(inventory.spells.at(index).manaCost);
+		spellDamage = std::make_optional<int>(inventory.spells.at(spellName).manaCost);
 	}
 
 	return spellDamage;
@@ -75,18 +75,18 @@ void Player::addXp(int xpAdd)
 
 }
 
-void Player::changeWeapon(int weaponIndex)
+void Player::changeWeapon(std::string weaponName)
 {
-	if (weaponIndex < inventory.weapons.size())
+	if (inventory.weapons.contains(weaponName))
 	{
-		currentWeapon = inventory.weapons.at(weaponIndex);
+		currentWeapon = inventory.weapons.at(weaponName);
 	}
 }
 
-void Player::changeShield(int shieldIndex)
+void Player::changeShield(std::string shieldName)
 {
-	if (shieldIndex < inventory.shields.size())
+	if (inventory.shields.contains(shieldName))
 	{
-		currentShield = inventory.shields.at(shieldIndex);
+		currentShield = inventory.shields.at(shieldName);
 	}
 }

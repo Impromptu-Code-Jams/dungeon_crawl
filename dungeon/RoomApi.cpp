@@ -25,11 +25,6 @@ void RoomApi::spawnEnemy(int x, int y, EnemyType enemyType)
         Enemy e;
         e.x = x;
         e.y = y;
-        e.atk = 2;
-        e.def = 0;
-        e.hp = 10;
-        e.type = enemyType;
-        e.glyph = 'g';
 
         enemyList.push_back(e);
     }
