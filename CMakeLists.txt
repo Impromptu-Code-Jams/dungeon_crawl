@@ -12,9 +12,22 @@ FetchContent_Declare(
 )
 # For Windows: Prevent overriding the parent project's compiler/linker settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
+
+FetchContent_Declare(googlebenchmark
+        GIT_REPOSITORY https://github.com/google/benchmark.git
+        GIT_TAG main) # need main for benchmark::benchmark
+
+FetchContent_MakeAvailable(
+        googletest
+        googlebenchmark)
 
 enable_testing()
+option(BENCHMARK_ENABLE_TESTING "Enable testing of the benchmark library." OFF)
+
+set(my_list "benchmark;benchmark_main;gmock;gmock_main;gtest;gtest_main")
+foreach(loop_var IN LISTS my_list)
+    set_target_properties(${loop_var} PROPERTIES FOLDER "Testing/Dependencies")
+endforeach()
 
 add_subdirectory(rooms)
 add_subdirectory(dungeon)
