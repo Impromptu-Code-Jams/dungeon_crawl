@@ -11,18 +11,24 @@ target_sources(RoomApi
 
 ################################################################
 
-add_library(DungeonEngine)
+set(FILES
+    "CombatManager.h"
+    "CombatManager.cpp"
+    "DungeonEngine.h"
+    "DungeonEngine.cpp"
+)
 
-target_sources(DungeonEngine
-    PRIVATE
-      CombatManager.cpp
-      DungeonEngine.cpp
-      GetCh.h
-    PUBLIC FILE_SET HEADERS
-    BASE_DIRS .
-    FILES 
-        CombatManager.h
-        DungeonEngine.h
+add_library(
+    DungeonEngine
+        STATIC
+        ${FILES}
+        
+)
+
+target_include_directories(
+    DungeonEngine
+        PUBLIC
+            ${PROJECT_SOURCE_DIR}
 )
 
 target_link_libraries(
@@ -30,4 +36,5 @@ target_link_libraries(
         PUBLIC
             IRoom
 )
+
 add_subdirectory(tests)

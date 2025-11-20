@@ -4,11 +4,7 @@
 #include <vector>
 #include "IRoom.h"
 #include "RoomApi.h"
-#include "IRoom.h"
 #include "CombatManager.h"
-
-#include <vector>
-#include <memory>
 
 class DungeonEngine
 {
@@ -21,13 +17,11 @@ public:
 
 	void enterRoom(int roomIndex);
 
-	RoomApi roomApi;
+	RoomApi roomApi{};
 private:
 	void handleInput();
 	void render();
 
-	void getInput();
-	void loop();
 	void getInput();
 	void loop();
 
@@ -37,7 +31,6 @@ private:
 
 	int currentRoomIndex{};
 	std::vector<std::unique_ptr<IRoom>> rooms{};
-	RoomApi roomApi{};
 	std::unique_ptr<CombatManager> combatManager{};
 
 	bool hasInput{};
