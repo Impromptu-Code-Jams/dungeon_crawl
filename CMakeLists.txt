@@ -18,12 +18,14 @@ enable_testing()
 
 add_subdirectory(rooms)
 add_subdirectory(dungeon)
+add_subdirectory(entities)
 
 ################################################################
 
 add_executable(
     DungeonCrawl
         main.cpp
+        dungeon/CombatManager.cpp
 )
 
 target_link_libraries(
@@ -32,6 +34,7 @@ target_link_libraries(
             DungeonEngine
             IRoom
             SpikeTrapRoom
+            Entities
 )
 
 install(

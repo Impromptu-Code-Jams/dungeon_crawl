@@ -1,11 +1,7 @@
 #pragma once
-
-#include <memory>
-#include <vector>
+#include "CombatManager.h"
 #include "IRoom.h"
 #include "RoomApi.h"
-#include "IRoom.h"
-#include "CombatManager.h"
 
 #include <vector>
 #include <memory>
@@ -17,30 +13,31 @@ public:
 
 	void addRoom(std::unique_ptr<IRoom> room);
 	void start();
-	std::vector<std::unique_ptr<IRoom>>& getRooms();
 
+private:
 	void enterRoom(int roomIndex);
 
-	RoomApi roomApi;
-private:
 	void handleInput();
 	void render();
 
 	void getInput();
 	void loop();
-	void getInput();
-	void loop();
 
 	bool running{};
 	bool quit{};
-	bool inCombat{false};
+	bool inCombat{};
 
+<<<<<<< HEAD
+        bool hasInput;
+        char inputBuffer;
+=======
 	int currentRoomIndex{};
 	std::vector<std::unique_ptr<IRoom>> rooms{};
 	RoomApi roomApi{};
 	std::unique_ptr<CombatManager> combatManager{};
 
 	bool hasInput{};
-	char inputBuffer{};
+	std::string inputBuffer{};
+>>>>>>> f5c048b (added combat input and combat manager stuff)
 };
 
