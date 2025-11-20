@@ -14,6 +14,7 @@ struct Inventory
 
 class Player : Entity
 {
+public: 
 	Player(); 
 
 	// Inherited functions

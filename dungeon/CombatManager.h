@@ -7,6 +7,9 @@
 #include "RoomApi.h"
 #include <iostream>
 
+#include "entities/Player.hpp"
+#include "entities/Entity.h"
+
 class CombatManager
 {
 public:
@@ -19,6 +22,6 @@ private:
 	bool magicMenuActive{ false };
 	bool itemMenuActive{ false };
 	bool playerIsBlocking{ false };
-	std::unique_ptr<Enemy> player;
-	std::unique_ptr<Enemy> enemy;
+	std::unique_ptr<Player> player;
+	std::unique_ptr<Entity> enemy;
 };

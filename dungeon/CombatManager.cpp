@@ -5,11 +5,11 @@ bool CombatManager::handleInput(char input, RoomApi& api)
 	bool inCombat = true;
 
 	switch (std::toupper(input)) {
-	case 'A':
-		int damage = player->getAttackDamage();
-		if (damage > -1)
+	case 'A': {
+		std::optional<int> damage = player->attack();
+		if (damage.has_value())
 		{
-			enemy->applyDamage(damage);
+			enemy->applyDamage(damage.value());
 			if (enemy->getHealth() <= 0)
 			{
 				api.showMessage("Enemy defeated!");
@@ -21,6 +21,7 @@ bool CombatManager::handleInput(char input, RoomApi& api)
 			}
 		}
 		break;
+	}
 	case 'D':
 		playerIsBlocking = true;
 		break;
