@@ -36,7 +36,7 @@ void RoomApi::spawnEnemy(int x, int y, EnemyType enemyType)
     }
 }
 
-std::vector<Enemy> RoomApi::getEnemyList()
+std::vector<Enemy>& RoomApi::getEnemyList()
 {
     return enemyList;
 }

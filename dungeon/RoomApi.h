@@ -36,7 +36,7 @@ public:
 	std::vector<std::string> getMessages();
 
 	void spawnEnemy(int x, int y, EnemyType enemyType);
-	std::vector<Enemy> getEnemyList();
+	std::vector<Enemy>& getEnemyList();
 
     void updateEnemies(int playerX, int playerY);
 
