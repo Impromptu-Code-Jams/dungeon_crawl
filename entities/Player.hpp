@@ -25,6 +25,7 @@ class Player : Entity
 	void addXp(int xpAdd);
 	void addItem(Item& item);
 	void changeWeapon(int weaponIndex);
+	void changeShield(int shieldIndex);
 	void useConsumable(int consumeIndex); 
 	void applyEffect(Effect& effect) override;
 	void removeEffect(Effect& effect) override; 

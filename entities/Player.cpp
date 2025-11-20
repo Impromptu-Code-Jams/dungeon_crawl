@@ -118,6 +118,14 @@ void Player::changeWeapon(int weaponIndex)
 	}
 }
 
+void Player::changeShield(int shieldIndex)
+{
+	if (shieldIndex < inventory.shields.size())
+	{
+		currentShield = inventory.shields.at(shieldIndex);
+	}
+}
+
 void Player::applyEffect(Effect& effect)
 {
 	Entity::applyEffect(effect); 
