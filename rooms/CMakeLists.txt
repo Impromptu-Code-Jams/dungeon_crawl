@@ -7,15 +7,29 @@ target_sources(IRoom
         IRoom.h
 )
 
+target_sources(IRoom
+    PUBLIC FILE_SET HEADERS BASE_DIRS . FILES
+        IRoom.h
+)
+
 target_link_libraries(
     IRoom
         INTERFACE
             RoomApi
 )
 
+set(FILES
+    "ProcGenRoom.h"
+    "ProcGenRoom.cpp"
+)
+
 #################################################################
 
-add_library(SpikeTrapRoom)
+add_library(
+    SpikeTrapRoom
+        STATIC
+        ${FILES}
+)
 
 target_sources(SpikeTrapRoom
     PRIVATE SpikeTrapRoom.cpp
@@ -36,3 +50,29 @@ install(
 )
 
 add_subdirectory(tests)
+
+#################################################################
+
+add_library(
+    ProcGenRoom
+        STATIC
+        ${FILES}
+)
+
+target_sources(ProcGenRoom
+    PRIVATE ProcGenRoom.cpp
+    PUBLIC FILE_SET HEADERS
+    BASE_DIRS .
+    FILES ProcGenRoom.h
+)
+
+target_link_libraries(
+    ProcGenRoom
+        PUBLIC
+            IRoom
+)
+
+install(
+    TARGETS
+        ProcGenRoom
+)
