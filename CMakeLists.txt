@@ -13,6 +13,7 @@ add_subdirectory(entities)
 add_executable(
     DungeonCrawl
         main.cpp
+        dungeon/CombatManager.cpp
 )
 
 target_link_libraries(

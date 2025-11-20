@@ -17,6 +17,10 @@ public:
 	RoomApi roomApi{};
 
 	bool handleInput(char input, RoomApi& api);
+    void display(int x, int y);
+    std::vector<std::string> createMainMenu();
+    std::vector<std::string> createMagicMenu();
+    std::vector<std::string> createItemMenu();
 
 private:
 	bool magicMenuActive{ false };
@@ -24,4 +28,6 @@ private:
 	bool playerIsBlocking{ false };
 	std::unique_ptr<Player> player;
 	std::unique_ptr<Entity> enemy;
+
+    void printMenu(const std::vector<std::string>& menu, int x, int y, int& rowNum);
 };

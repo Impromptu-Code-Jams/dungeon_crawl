@@ -2,6 +2,7 @@
 #include "CombatManager.h"
 #include "IRoom.h"
 #include "RoomApi.h"
+#include "CombatManager.h"
 
 #include <vector>
 #include <memory>
