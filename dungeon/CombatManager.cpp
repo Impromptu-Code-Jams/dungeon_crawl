@@ -6,10 +6,23 @@ bool CombatManager::handleInput(char input, RoomApi& api)
 
 	switch (std::toupper(input)) {
 	case 'A':
-		api.showMessage("You attacked!");
+		int damage = player->getAttackDamage();
+		if (damage > -1)
+		{
+			enemy->applyDamage(damage);
+			if (enemy->getHealth() <= 0)
+			{
+				api.showMessage("Enemy defeated!");
+				inCombat = false;
+			}
+			else
+			{
+				api.showMessage("You attacked the enemy!");
+			}
+		}
 		break;
 	case 'D':
-		api.showMessage("You defended!");
+		playerIsBlocking = true;
 		break;
 	case 'M':
 		magicMenuActive = true;
