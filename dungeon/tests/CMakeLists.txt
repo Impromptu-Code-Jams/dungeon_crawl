@@ -1,7 +1,8 @@
-project(RoomsTests)
+project(DungeonTests)
 
 set(FILES
-    SpikeRoomTest.cpp
+    DungeonEngineTest.cpp
+    RoomApiTest.cpp
 )
 
 add_executable(
@@ -12,14 +13,15 @@ add_executable(
 target_include_directories(
     ${PROJECT_NAME}
         PUBLIC
-            "../rooms"
+            "../dungeon"
 )
 
 target_link_libraries(
     ${PROJECT_NAME}
         PRIVATE
             gtest_main
-            SpikeTrapRoom
+            DungeonEngine
+            RoomApi
 )
 
 include(GoogleTest)

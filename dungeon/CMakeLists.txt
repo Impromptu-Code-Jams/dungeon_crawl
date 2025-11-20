@@ -11,9 +11,9 @@ target_sources(RoomApi
 
 ################################################################
 
-add_library(Dungeon)
+add_library(DungeonEngine)
 
-target_sources(Dungeon
+target_sources(DungeonEngine
     PRIVATE
       DungeonEngine.cpp
       GetCh.h
@@ -24,8 +24,8 @@ target_sources(Dungeon
 )
 
 target_link_libraries(
-    Dungeon
+    DungeonEngine
         PUBLIC
             IRoom
 )
-
+add_subdirectory(tests)

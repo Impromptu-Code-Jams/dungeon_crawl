@@ -29,7 +29,7 @@ add_executable(
 target_link_libraries(
     DungeonCrawl
         PRIVATE
-            Dungeon
+            DungeonEngine
             IRoom
             SpikeTrapRoom
 )

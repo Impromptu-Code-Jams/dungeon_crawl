@@ -2,14 +2,15 @@
 
 class SpikeTrapRoom : public IRoom
 {
-    public:
-        SpikeTrapRoom();
+public:
+	SpikeTrapRoom();
+	~SpikeTrapRoom();
 
-        std::string name() const;
-        std::vector<std::string> getTileMap() const;
-        void onEnter(RoomApi& api);
+	std::string name() const;
+	std::vector<std::string> getTileMap() const;
+	void onEnter(RoomApi& api);
 
-    private:
-        std::vector<std::string> tileMap;
+private:
+	std::vector<std::string> tileMap;
 };
 

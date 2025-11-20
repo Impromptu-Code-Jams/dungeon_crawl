@@ -201,3 +201,7 @@ void DungeonEngine::loop()
     }
 }
 
+std::vector<std::unique_ptr<IRoom>>& DungeonEngine::getRooms()
+{
+    return rooms;
+}

@@ -2,34 +2,35 @@
 
 #include <memory>
 #include <vector>
-#include "IRoom.h"
 #include "RoomApi.h"
+#include "IRoom.h"
 
 class DungeonEngine
 {
-    public:
-        DungeonEngine();
-        
-        void addRoom(std::unique_ptr<IRoom> room);
-        void start();
+public:
+	DungeonEngine();
 
-    private:
-        void enterRoom(int roomIndex);
+	void addRoom(std::unique_ptr<IRoom> room);
+	void start();
+	std::vector<std::unique_ptr<IRoom>>& getRooms();
 
-        void handleInput();
-        void render();
+	void enterRoom(int roomIndex);
 
-        void getInput();
-        void loop();
+	RoomApi roomApi;
+private:
+	void handleInput();
+	void render();
 
-        bool running;
-        bool quit;
+	void getInput();
+	void loop();
 
-        int currentRoomIndex;
-        std::vector<std::unique_ptr<IRoom>> rooms;
-        RoomApi roomApi;
+	bool running;
+	bool quit;
 
-        bool hasInput;
-        char inputBuffer;
+	int currentRoomIndex;
+	std::vector<std::unique_ptr<IRoom>> rooms;
+
+	bool hasInput;
+	char inputBuffer;
 };
 
