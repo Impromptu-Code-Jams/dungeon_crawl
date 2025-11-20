@@ -175,6 +175,11 @@ void DungeonEngine::render()
 	//
 
 	std::cout << "test msg: [m] | quit: [q] " << std::endl;
+
+	if (inCombat)
+	{
+		combatManager->display(35, 0);
+	}
 }
 
 void DungeonEngine::loop()

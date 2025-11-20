@@ -66,7 +66,6 @@ bool CombatManager::handleInput(char input, RoomApi& api)
 
 	return inCombat;
 }
-#include "CombatManager.h"
 
 void goto_xy(int x, int y)
 {
