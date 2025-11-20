@@ -1,6 +1,7 @@
 project(DungeonTests)
 
 set(FILES
+    CombatManagerTest.cpp
     DungeonEngineTest.cpp
     RoomApiTest.cpp
 )
