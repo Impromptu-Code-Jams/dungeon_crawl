@@ -5,7 +5,7 @@
 
 #include "DungeonEngine.h"
 #include "IRoom.h"
-#include "GetCh.h"
+#include "GetSingleChar.h"
 
 DungeonEngine::DungeonEngine() :
     running(false),
@@ -33,7 +33,7 @@ void DungeonEngine::start()
 
     running = true;
     std::thread t1(&DungeonEngine::loop, this);
-    std::thread t2(&DungeonEngine::getInput, this);
+    std::thread t2(&DungeonEngine::getUserInput, this);
 
     t1.join();
     t2.join();
@@ -45,7 +45,7 @@ void DungeonEngine::enterRoom(int roomIndex)
     rooms[currentRoomIndex]->onEnter(roomApi);
 }
 
-void DungeonEngine::getInput()
+void DungeonEngine::getUserInput()
 {
     while (!quit)
     {

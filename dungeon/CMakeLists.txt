@@ -16,7 +16,6 @@ add_library(Dungeon)
 target_sources(Dungeon
     PRIVATE
       DungeonEngine.cpp
-      GetCh.h
     PUBLIC FILE_SET HEADERS
     BASE_DIRS .
     FILES 
@@ -26,6 +25,7 @@ target_sources(Dungeon
 target_link_libraries(
     Dungeon
         PRIVATE
+            Utils
             IRoom
 )
 

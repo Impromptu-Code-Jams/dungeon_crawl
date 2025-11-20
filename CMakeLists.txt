@@ -4,6 +4,7 @@ project(DungeonCrawl)
 
 set(CMAKE_CXX_STANDARD 23)
 
+add_subdirectory(utils)
 add_subdirectory(rooms)
 add_subdirectory(dungeon)
 

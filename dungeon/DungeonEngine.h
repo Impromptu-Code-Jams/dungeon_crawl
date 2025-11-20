@@ -19,7 +19,7 @@ class DungeonEngine
         void handleInput();
         void render();
 
-        void getInput();
+        void getUserInput();
         void loop();
 
         bool running;
