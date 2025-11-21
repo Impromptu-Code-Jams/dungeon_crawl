@@ -1,3 +1,4 @@
+#include "RoomApi.h"
 #pragma once
 
 #include <string>
@@ -45,4 +46,13 @@ void RoomApi::updateEnemies(int playerX, int playerY)
     for (auto& enemy : enemyList) {
         enemy.updatePosition(playerX, playerY);
     }
+}
+
+bool RoomApi::checkCollisions(int playerX, int playerY)
+{
+    for (auto& enemy : enemyList) {
+        if (playerX == enemy.x && playerY == enemy.y)
+            return true;
+    }
+    return false;
 }

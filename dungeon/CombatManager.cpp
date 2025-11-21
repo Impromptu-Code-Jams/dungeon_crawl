@@ -1,6 +1,6 @@
 #include "CombatManager.h"
 
-std::optional<Action> CombatManager::handleInput(char input, RoomApi& api, std::shared_ptr<Player> player, std::shared_ptr < Entity> enemy)
+std::optional<Action> CombatManager::handleInput(char input, RoomApi& api, std::shared_ptr<Player> player, std::shared_ptr <Enemy> enemy)
 {
 	std::optional<Action> playerAction;
 	switch (std::toupper(input)) {

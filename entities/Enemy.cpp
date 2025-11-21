@@ -9,6 +9,10 @@ Enemy::Enemy()
 	setDefense(5);
 	setStatus(ALIVE);
 
+	x = 2;
+	y = 2;
+	glyph = 'g';
+
 }
 
 std::optional<int> Enemy::attack()
@@ -66,24 +70,9 @@ void Enemy::useConsumable(int consumeIndex)
 	}
 }
 
-void Enemy::applyEffect(Effect& effect)
-{
-	Entity::applyEffect(effect); 
-
-	if (effect.type == Effect::DISARM)
-	{
-		canUseWeapon = false;
-		canUseShield = true;
-	}
-}
-
-void Enemy::removeEffect(Effect& effect)
-{
-	Entity::removeEffect(effect); 
-
-	if (effect.type == Effect::DISARM)
-	{
-		canUseWeapon = true; 
-		canUseShield = true;
-	}
-}
+void Enemy::updatePosition(int playerX, int playerY) {
+	if (x > playerX) x--;
+	else if (x < playerX) x++;
+	else if (y > playerY) y--;
+	else if (y < playerY) y++;
+};

@@ -22,6 +22,9 @@ public:
 	std::optional<int> castSpell(int index) override;
 	Status applyDamage(const int damageAmount) override;
 
+	int moves;
+	int speed;
+
 	// Player attributes & inventory
 	void addXp(int xpAdd);
 	void addItem(Item& item);

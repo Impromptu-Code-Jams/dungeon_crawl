@@ -21,12 +21,10 @@ public:
 	std::optional<int> attack();
 	std::optional<int> castSpell(int index);
 	Status applyDamage(const int damageAmount);
-
+	void updatePosition(int playerX, int playerY);
 	// Enemy attributes & inventory
 	
 	void useConsumable(int consumeIndex); 
-	void applyEffect(Effect& effect) override;
-	void removeEffect(Effect& effect) override; 
 	void blockNextAttack() { block = true; }
 
 	const std::vector<Spell>& getSpells() const { return inventory.spells; }

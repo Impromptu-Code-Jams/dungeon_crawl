@@ -40,6 +40,8 @@ public:
 
     void updateEnemies(int playerX, int playerY);
 
+    bool checkCollisions(int playerX, int playerY);
+
 private:
     std::vector<std::string> messages;
     std::vector<Enemy> enemyList;

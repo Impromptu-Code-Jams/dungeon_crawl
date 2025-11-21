@@ -10,14 +10,14 @@
 DungeonEngine::DungeonEngine() :
 	running(false),
 	quit(false),
-	inCombat(true),
+	inCombat(false),
 	currentRoomIndex(0),
 	hasInput(false),
 	inputBuffer()
 {
 	combatManager = std::make_unique<CombatManager>();
 	player = std::make_shared<Player>();
-	enemy = std::make_shared<Player>();
+	enemy = std::make_shared<Enemy>();
 }
 
 void DungeonEngine::addRoom(std::unique_ptr<IRoom> room)
@@ -75,10 +75,28 @@ void DungeonEngine::handleInput()
 		{
 			if (!combatManager->handleInput(inputBuffer, roomApi, player, enemy))
 			{
-				inCombat = false;
+				//inCombat = false;
 			}
 		}
-		else if (inputBuffer == 'm')
+		else {
+			if (inputBuffer == 'w') {
+				player->y--;
+				player->moves--;
+			}
+			else if (inputBuffer == 'a') {
+				player->x--;
+				player->moves--;
+			}
+			else if (inputBuffer == 's') {
+				player->y++;
+				player->moves--;
+			}
+			else if (inputBuffer == 'd') {
+				player->x++;
+				player->moves--;
+			}
+		}
+		if (inputBuffer == 'm')
 		{
 			static int x = 1;
 			roomApi.showMessage("Hello There! " + std::to_string(x));
@@ -114,6 +132,8 @@ void DungeonEngine::render()
     {
         tileMap[enemy.y][enemy.x] = enemy.glyph;
     }
+
+	tileMap[player->y][player->x] = player->glyph;
 
 	//
 	// Render the current room.
@@ -196,8 +216,18 @@ void DungeonEngine::loop()
 
 		last = now;
 
-        handleInput();
-        roomApi.updateEnemies(6, 3); //TODO feed player position
+	
+		handleInput();
+		if (player->moves == 0) {
+			roomApi.updateEnemies(player->x, player->y);
+			player->moves = player->speed;
+		}
+		
+		if (roomApi.checkCollisions(player->x, player->y)) {
+			inCombat = true;
+			combatManager->display(35, 0);
+		}
+        
 
 		if (quit)
 		{
