@@ -6,6 +6,7 @@
 #include "DungeonEngine.h"
 #include "IRoom.h"
 #include "GetCh.h"
+#include "ProcGenRoom.h"
 
 DungeonEngine::DungeonEngine() :
 	running(false),
@@ -59,6 +60,12 @@ void DungeonEngine::getInput()
 		if (inputBuffer == 'q')
 		{
 			quit = true;
+		}
+		else if (inputBuffer == 'n'){
+			rooms[0].reset();
+			roomApi.getEnemyList().clear();
+			rooms[0] = std::make_unique<ProcGenRoom>();
+			rooms[0]->onEnter(roomApi);
 		}
 		else
 		{
@@ -191,7 +198,7 @@ void DungeonEngine::render()
 
 	if (inCombat)
 	{
-		combatManager->display(35, 0);
+		combatManager->display(65, 0);
 	}
 }
 
