@@ -22,7 +22,7 @@ FetchContent_MakeAvailable(
         googlebenchmark)
 
 enable_testing()
-option(BENCHMARK_ENABLE_TESTING "Enable testing of the benchmark library." OFF)
+set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "Enable testing of the benchmark library." FORCE)
 
 set(my_list "benchmark;benchmark_main;gmock;gmock_main;gtest;gtest_main")
 foreach(loop_var IN LISTS my_list)

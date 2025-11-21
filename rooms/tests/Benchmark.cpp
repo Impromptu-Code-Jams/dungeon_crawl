@@ -27,7 +27,5 @@ static void BM_SpikeTrapRoom(benchmark::State& state) {
 }
 // Register the function as a benchmark
 BENCHMARK(BM_SpikeTrapRoom);
-TEST(MyTest, THing) {
 
-}
 BENCHMARK_MAIN();
