@@ -6,9 +6,10 @@
 ProcGenRoom::ProcGenRoom()
 {
 	std::mt19937 engine(std::chrono::system_clock::now().time_since_epoch().count());
-	std::uniform_int_distribution<int> distribution(5, 15);
-	xMax = distribution(engine);
-	yMax = distribution(engine);
+	std::uniform_int_distribution<int> distributionX(5, 15);
+	std::uniform_int_distribution<int> distributionY(5, 10);
+	xMax = distributionX(engine);
+	yMax = distributionY(engine);
 
 	generateTileMap(xMax, yMax);
 }
