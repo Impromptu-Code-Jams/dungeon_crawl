@@ -10,6 +10,10 @@ public:
     virtual std::optional<int> attack() = 0;
     virtual std::optional<int> castSpell(int index) = 0;
     virtual Status applyDamage(const int damageAmount) = 0;
+    
+    int x;
+    int y;
+    char glyph;
 
     // Update loop for effects 
     void update()

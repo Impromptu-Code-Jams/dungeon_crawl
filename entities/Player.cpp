@@ -9,6 +9,12 @@ Player::Player()
 	setDefense(5);
 	setStatus(ALIVE);
 
+	x = 5;
+	y = 2;
+	glyph = 'P';
+	speed = 2;
+	moves = speed;
+
 	// Give the player a bad default weapon
 	Weapon stick;
 	stick.name = "stick";

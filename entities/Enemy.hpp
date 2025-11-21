@@ -3,7 +3,6 @@
 #include "Entity.h"
 #include <vector>
 #include <iostream>
-#include <optional>
 
 struct Inventory
 {
@@ -13,23 +12,18 @@ struct Inventory
 	std::vector<Spell> spells;
 };
 
-class Player : public Entity
+class Enemy : Entity
 {
-public: 
-	Player();
+public:
+	Enemy(); 
+
 	// Inherited functions
-	std::optional<int> attack() override;
-	std::optional<int> castSpell(int index) override;
-	Status applyDamage(const int damageAmount) override;
-
-	int moves;
-	int speed;
-
-	// Player attributes & inventory
-	void addXp(int xpAdd);
-	void addItem(Item& item);
-	void changeWeapon(int weaponIndex);
-	void changeShield(int shieldIndex);
+	std::optional<int> attack();
+	std::optional<int> castSpell(int index);
+	Status applyDamage(const int damageAmount);
+	void updatePosition(int playerX, int playerY);
+	// Enemy attributes & inventory
+	
 	void useConsumable(int consumeIndex); 
 	void blockNextAttack() { block = true; }
 
@@ -37,6 +31,9 @@ public:
 	const std::vector<Weapon>& getWeapons() const { return inventory.weapons; }
 	const std::vector<Consumable>& getConsumables() const { return inventory.consumables; }
 	const std::vector<Shield>& getShields() const { return inventory.shields; }
+
+	enum Type { GOBLIN, SPIKES };
+	Type type{};
 private: 
 	int xp; 
 	Inventory inventory;

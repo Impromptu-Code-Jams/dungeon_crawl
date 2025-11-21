@@ -16,7 +16,7 @@ public:
 	CombatManager() = default;
 	RoomApi roomApi{};
 
-	std::optional<Action> handleInput(char input, RoomApi& api, std::shared_ptr<Player> player, std::shared_ptr<Entity> enemy);
+	std::optional<Action> handleInput(char input, RoomApi& api, std::shared_ptr<Player> player, std::shared_ptr<Enemy> enemy);
     void display(int x, int y);
     std::vector<std::string> createMainMenu();
     std::vector<std::string> createMagicMenu();

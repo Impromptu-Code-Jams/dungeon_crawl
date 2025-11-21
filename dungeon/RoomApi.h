@@ -11,13 +11,20 @@ enum EnemyType
 
 struct Enemy
 {
-	EnemyType type;
-	int x;
-	int y;
-	int hp;
-	int atk;
-	int def;
-	char glyph;
+    EnemyType type;
+    int x;
+    int y;
+    int hp;
+    int atk;
+    int def;
+    char glyph;
+
+    void updatePosition(int playerX, int playerY) {
+        if (x > playerX) x--;
+        else if (x < playerX) x++;
+        else if (y > playerY) y--;
+        else if (y < playerY) y++;
+    };
 };
 
 class RoomApi
@@ -31,8 +38,12 @@ public:
 	void spawnEnemy(int x, int y, EnemyType enemyType);
 	std::vector<Enemy> getEnemyList();
 
+    void updateEnemies(int playerX, int playerY);
+
+    bool checkCollisions(int playerX, int playerY);
+
 private:
-	std::vector<std::string> messages;
-	std::vector<Enemy> enemyList;
+    std::vector<std::string> messages;
+    std::vector<Enemy> enemyList;
 };
 
