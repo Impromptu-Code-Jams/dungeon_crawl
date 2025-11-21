@@ -232,7 +232,7 @@ void DungeonEngine::loop()
 		
 		if (roomApi.checkCollisions(player->x, player->y)) {
 			inCombat = true;
-			combatManager->display(35, 0);
+			combatManager->display(65, 0);
 		}
         
 

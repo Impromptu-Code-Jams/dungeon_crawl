@@ -9,7 +9,7 @@ Player::Player()
 	setDefense(5);
 	setStatus(ALIVE);
 
-	x = 5;
+	x = 4;
 	y = 2;
 	glyph = 'P';
 	speed = 2;
