@@ -198,7 +198,7 @@ void DungeonEngine::render()
 
 	if (inCombat)
 	{
-		combatManager->display(35, 0);
+		combatManager->display(65, 0);
 	}
 }
 

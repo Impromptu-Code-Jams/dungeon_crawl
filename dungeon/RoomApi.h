@@ -6,7 +6,10 @@
 
 enum EnemyType
 {
-	Goblin
+	Goblin,
+	Wolf,
+	Ogre,
+	LAST_ENEMY
 };
 
 struct Enemy

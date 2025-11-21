@@ -26,11 +26,26 @@ std::vector<std::string> ProcGenRoom::getTileMap() const
 
 void ProcGenRoom::onEnter(RoomApi& api)
 {
-	api.showMessage("A goblin appears!");
+	srand(time(NULL));
+	EnemyType randomEnemy = static_cast<EnemyType>(rand() % EnemyType::LAST_ENEMY);
+	std::string msg{};
+	switch (randomEnemy) {
+	case EnemyType::Goblin:
+		msg = "A Goblin appears! He's goblin for a fight!";
+		break;
+	case EnemyType::Wolf:
+		msg = "A wolf hairily appears. Show him your bit is worse than his bark";
+		break;
+	case EnemyType::Ogre:
+		msg = "An ogre ogreishly appears. Time to get into his swamp!";
+		break;
+	}
+
+	api.showMessage(msg);
 	std::mt19937 engine(std::chrono::system_clock::now().time_since_epoch().count());
-	std::uniform_int_distribution<int> xPos(1, xMax-2);
-	std::uniform_int_distribution<int> yPos(1, yMax-2);
-	api.spawnEnemy(xPos(engine), yPos(engine), EnemyType::Goblin);
+	std::uniform_int_distribution<int> xPos(1, xMax - 2);
+	std::uniform_int_distribution<int> yPos(1, yMax - 2);
+	api.spawnEnemy(xPos(engine), yPos(engine), randomEnemy);
 }
 
 void ProcGenRoom::generateTileMap(int x, int y)

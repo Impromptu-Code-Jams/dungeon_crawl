@@ -33,6 +33,31 @@ void RoomApi::spawnEnemy(int x, int y, EnemyType enemyType)
         e.glyph = 'g';
 
         enemyList.push_back(e);
+    } else if (enemyType == EnemyType::Wolf)
+    {
+        Enemy e;
+        e.x = x;
+        e.y = y;
+        e.atk = 1;
+        e.def = 1;
+        e.hp = 8;
+        e.type = enemyType;
+        e.glyph = 'w';
+
+        enemyList.push_back(e);
+    }
+    else if (enemyType == EnemyType::Ogre)
+    {
+        Enemy e;
+        e.x = x;
+        e.y = y;
+        e.atk = 4;
+        e.def = 5;
+        e.hp = 15;
+        e.type = enemyType;
+        e.glyph = 'O';
+
+        enemyList.push_back(e);
     }
 }
 
