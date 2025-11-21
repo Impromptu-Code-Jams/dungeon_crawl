@@ -34,7 +34,7 @@ private:
 	RoomApi roomApi{};
 	std::unique_ptr<CombatManager> combatManager{};
 	std::shared_ptr<Player> player;
-	std::shared_ptr<Enemy> enemy;
+	std::shared_ptr<Player> enemy;
 	bool hasInput{};
 	char inputBuffer{};
 	bool combat;

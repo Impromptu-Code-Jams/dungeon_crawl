@@ -1,6 +1,6 @@
 #include "CombatManager.h"
 
-std::optional<Action> CombatManager::handleInput(char input, RoomApi& api, std::shared_ptr<Player> player, std::shared_ptr <Enemy> enemy)
+std::optional<Action> CombatManager::handleInput(char input, RoomApi& api, std::shared_ptr<Player> player, std::shared_ptr <Player> enemy)
 {
 	std::optional<Action> playerAction;
 	switch (std::toupper(input)) {
@@ -69,7 +69,7 @@ std::vector<std::string> CombatManager::createMainMenu()
     return menu;
 }
 
-std::vector<std::string> CombatManager::createMagicMenu()
+std::vector<std::string> CombatManager::createMagicMenu(std::shared_ptr<Player> player)
 {
     std::vector<std::string> menu;
     menu.push_back("|              Spells             |");
@@ -78,11 +78,44 @@ std::vector<std::string> CombatManager::createMagicMenu()
     return menu;
 }
 
-std::vector<std::string> CombatManager::createItemMenu()
+std::vector<std::string> CombatManager::createItemMenu(std::shared_ptr<Player> player)
 {
+    std::vector<Consumable> items;
+    if (player != nullptr)
+    {
+        items = player->getConsumables();
+    }
     std::vector<std::string> menu;
     menu.push_back("|              Items              |");
-    menu.push_back("|                                 |");
+    if (items.empty())
+    {
+        menu.push_back("|                                 |");
+    }
+    else
+    {
+        for (std::size_t i = 0; i < items.size() && i < 10; i++)
+        {
+            std::string effectString = "";
+            switch (items.at(i).effect.type)
+            {
+                case Effect::HEALTH_EFFECT:
+                    effectString = /*std::to_string(static_cast<HealthEffect>(items.at(i).effect).modifierValue) + */"HP";
+                    break;
+                case Effect::MANA_EFFECT:
+                    effectString = /*std::to_string(static_cast<ManaEffect>(items.at(i).effect).modifierValue) + */"MP";
+                    break;
+                case Effect::DEFENSE_EFFECT:
+                    effectString = /*std::to_string(static_cast<DefenseEffect>(items.at(i).effect).modifierValue) + */"DEF";
+                    break;
+                case Effect::STRENGTH_EFFECT:
+                    effectString = /*std::to_string(static_cast<StrengthEffect>(items.at(i).effect).modifierValue) + */"STR";
+                    break;
+                default:
+                    effectString = "?";
+            }
+            menu.push_back("| [" + std::to_string(i) + "]" + " " + items.at(i).name + ": " + effectString + "          |" );
+        }
+    }
     menu.push_back("+---------------------------------+");
     return menu;
 }
@@ -97,19 +130,19 @@ void CombatManager::printMenu(const std::vector<std::string>& menu, int x, int y
     }
 }
 
-void CombatManager::display(int x, int y)
+void CombatManager::display(int x, int y, std::shared_ptr<Player> player, std::shared_ptr<Entity> enemy)
 {   
     std::vector<std::string> mainMenu = createMainMenu();
     int rowNum = 0;
     printMenu(mainMenu, x, y, rowNum);
     if (magicMenuActive)
     {
-        std::vector<std::string> magicMenu = createMagicMenu();
+        std::vector<std::string> magicMenu = createMagicMenu(player);
         printMenu(magicMenu, x, y, rowNum);
     }
     if (itemMenuActive)
     {
-        std::vector<std::string> itemMenu = createItemMenu();
+        std::vector<std::string> itemMenu = createItemMenu(player);
         printMenu(itemMenu, x, y, rowNum);
     }
     goto_xy(0, 0);

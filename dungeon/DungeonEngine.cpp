@@ -18,7 +18,11 @@ DungeonEngine::DungeonEngine() :
 {
 	combatManager = std::make_unique<CombatManager>();
 	player = std::make_shared<Player>();
-	enemy = std::make_shared<Enemy>();
+	enemy = std::make_shared<Player>();
+    Consumable startingPotion;
+    startingPotion.name = "Health Potion";
+    startingPotion.effect = HealthEffect(5);
+    player->addItem(startingPotion);
 }
 
 void DungeonEngine::addRoom(std::unique_ptr<IRoom> room)
@@ -82,7 +86,7 @@ void DungeonEngine::handleInput()
 		{
 			if (!combatManager->handleInput(inputBuffer, roomApi, player, enemy))
 			{
-				//inCombat = false;
+				inCombat = false;
 			}
 		}
 		else {
@@ -198,7 +202,7 @@ void DungeonEngine::render()
 
 	if (inCombat)
 	{
-		combatManager->display(65, 0);
+		combatManager->display(65, 0, player, enemy);
 	}
 }
 
@@ -232,7 +236,6 @@ void DungeonEngine::loop()
 		
 		if (roomApi.checkCollisions(player->x, player->y)) {
 			inCombat = true;
-			combatManager->display(65, 0);
 		}
         
 
